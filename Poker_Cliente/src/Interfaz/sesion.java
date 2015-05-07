@@ -91,7 +91,7 @@ public class sesion extends JFrame {
 		contentPane.add(btnConfiguraciones);
 		
 		JButton btnCrear = new JButton("Crear");
-		btnCrear.setBounds(299, 312, 117, 25);
+		btnCrear.setBounds(237, 312, 117, 25);
 		contentPane.add(btnCrear);
 		
 		JButton btnUnirse = new JButton("Unirse");
@@ -108,7 +108,7 @@ public class sesion extends JFrame {
 				}
 			}
 		});
-		btnUnirse.setBounds(170, 312, 117, 25);
+		btnUnirse.setBounds(81, 312, 117, 25);
 		contentPane.add(btnUnirse);
 		
 		JButton button = new JButton("Cerrar Sesion");
@@ -119,6 +119,16 @@ public class sesion extends JFrame {
 		});
 		button.setBounds(299, 349, 206, 25);
 		contentPane.add(button);
+		
+		JButton btnManos = new JButton("Manos");
+		btnManos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Clasificacion_manos clasificacionmanos= new Clasificacion_manos();
+				clasificacionmanos.setVisible(true);
+			}
+		});
+		btnManos.setBounds(388, 312, 117, 25);
+		contentPane.add(btnManos);
 		
 		lblNombreUsuario = new JLabel("NombreUsuario");
 		lblNombreUsuario.setForeground(Color.WHITE);
@@ -170,7 +180,13 @@ public juego getJuego() {
 	public void setJuego(juego juego) {
 		this.juego = juego;
 	}
-
+	
+	
+/**
+ * muestra el avatar o imagen del jugador que inicio sesion 
+ * @param nombreUsuario ( el nombre del usuario que inicio sesion 
+ * @throws RemoteException
+ */
 public void mostrarAvatarSesion(String nombreUsuario) throws RemoteException{
 	List<String> j=rmi.traerAvatar(nombreUsuario);
 	lblNombreUsuario.setText(j.get(0));

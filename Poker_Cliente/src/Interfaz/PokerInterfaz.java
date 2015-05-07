@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Conexion.RMI;
@@ -26,7 +27,7 @@ public class PokerInterfaz extends JFrame {
 
 	private JPanel panel;
 	private JTextField campoUsuario;
-	private JTextField campoContrasena;
+	private JPasswordField campoContrasena;
 	private JLabel label;
 	private JLabel fondo;
 	private sesion sesion;
@@ -77,7 +78,7 @@ public class PokerInterfaz extends JFrame {
 		panel.add(campoUsuario);
 		campoUsuario.setColumns(10);
 		
-		campoContrasena = new JTextField();
+		campoContrasena = new JPasswordField();
 		campoContrasena.setColumns(10);
 		campoContrasena.setBounds(66, 191, 186, 27);
 		panel.add(campoContrasena);

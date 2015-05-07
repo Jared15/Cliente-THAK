@@ -197,7 +197,7 @@ public class juego extends JFrame {
 		
 		llenarAvatares();
 		cartasJugadores();
-		
+		System.out.println("IDJUGADOR------------------------------"+idJugador);
 		setFichaJugador();
 		
 		carta1 = new JLabel("");
@@ -234,31 +234,32 @@ public class juego extends JFrame {
 		Icon icono5 = new ImageIcon(c5.getImage().getScaledInstance(carta5.getWidth(), carta5.getHeight(), Image.SCALE_DEFAULT));
 		carta5.setIcon(icono5);
 		panel.add(carta5);
-		
+
 		btnEmpezar_1 = new JButton("Empezar");
 		btnEmpezar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					rmi.getListaCartasMesa();
-					mostrarCartasJugador();
+					
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
-		btnEmpezar_1.setBounds(33, 177, 117, 25);
-		if(idJugador==1){
+		btnEmpezar_1.setBounds(23, 177, 117, 25);
 		panel.add(btnEmpezar_1);
-		}
-		
-		
 		fondo = new JLabel("");
 		panel.add(fondo);
 		
 		fondo.setBounds(0,0, 1500, 1000);
+		
+
 	}
 	
+	
+	/**
+	 * muestra las primeras 3 cartas del juego en la mesa
+	 */
 	public void cambiarCartas(){
 		c = new ImageIcon(cartas.get(0));
 
@@ -271,12 +272,20 @@ public class juego extends JFrame {
 		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
 		carta3.setIcon(icono);
 	}
+	
+	/**
+	 * muestra la 4ta carta del juego en la mesa
+	 */
 	public void cuarta(){
 		c = new ImageIcon(cartas.get(3));
 		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
 		carta4.setIcon(icono);
 	}
 	
+	
+	/**
+	 * muestra la 5ta carta del juego en la mesa
+	 */
 	public void quinta(){
 
 		c = new ImageIcon(cartas.get(4));
@@ -284,10 +293,17 @@ public class juego extends JFrame {
 		carta5.setIcon(icono);
 		
 	}
-
+	/**
+	 * Cambia el color de la mesa para el jugador
+	 * @param path (direccion de la imagen que selecciono para la mesa 
+	 */
 	public void setColorMesa(String path){
 		fondo.setIcon(new ImageIcon(path));
 	}
+	
+	/**
+	 * muestra las imagenes o avatares de los jugadores que ingresaron a la mesa 
+	 */
 	public void llenarAvatares(){
 		
 		switch(listaJugadores.size()){
@@ -327,6 +343,10 @@ public class juego extends JFrame {
 		}
 		
 	}
+	
+	/**
+	 * Muestra la ficha que muestra su capital directamente en el jugador que inicio sesion 
+	 */
 	public void setFichaJugador(){
 		switch(idJugador){
 		case 1:
@@ -350,6 +370,10 @@ public class juego extends JFrame {
 		}
 	}
 	
+	
+	/**
+	 * llena la lista de cartas de todos los jugadores en la interfaz pero no las muestra
+	 */
 	public void cartasJugadores(){
 		
 		carta11 = new JLabel("");
@@ -471,13 +495,14 @@ public class juego extends JFrame {
 		this.cartas = cartas1;
 	}
 	
+	
+	/**
+	 * muestra las cartas del jugador dueno de la sesion
+	 */
 	public void mostrarCartasJugador(){
 		ImageIcon iic;
 		Icon ic ;
 		
-		for(String s: cartas){
-			System.out.println(s);
-		}
 		switch(idJugador){
 		case 1:
 			iic = new ImageIcon(cartas.get(5));
