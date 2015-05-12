@@ -497,7 +497,7 @@ public class juego extends JFrame {
 	
 	
 	/**
-	 * muestra las cartas del jugador dueno de la sesion
+	 * muestra las cartas del jugador dueño de la sesión
 	 */
 	public void mostrarCartasJugador(){
 		ImageIcon iic;
