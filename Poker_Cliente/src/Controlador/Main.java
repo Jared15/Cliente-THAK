@@ -50,7 +50,7 @@ if(updateMsg!=null){
         		}
         		pokerInterfaz.getSesion().getCm().getJuego().setVisible(true);
         		pokerInterfaz.getSesion().getCm().getJuego().setCartas(lj);  		
-        		/*System.out.println("Llama rmi! en update ");
+        		/*System.out.println("Llama rmi! en update "); 
         		remoteService.mostrarPrimeras3();
         		}else if(state==1){*/
         			System.out.println("Estado 2");
