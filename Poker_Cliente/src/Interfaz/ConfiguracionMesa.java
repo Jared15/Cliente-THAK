@@ -33,7 +33,7 @@ public class ConfiguracionMesa extends JFrame {
 	RMI rmi;
 	private JTable table;
 	JComboBox comboBox;
-	juego juego;
+	MesaJuego juego;
 	private JButton button;
 	List<List<String>> lj;
 	DefaultTableModel modelo;
@@ -42,11 +42,11 @@ public class ConfiguracionMesa extends JFrame {
 	private JComboBox comboBox_1;
 	private JLabel label_1;
 
-	public juego getJuego() {
+	public MesaJuego getJuego() {
 		return juego;
 	}
 
-	public void setJuego(juego juego) {
+	public void setJuego(MesaJuego juego) {
 		this.juego = juego;
 	}
 
@@ -84,24 +84,19 @@ public class ConfiguracionMesa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(lj.size()>1 && lj.size()<7){
 				try {
-					juego = new juego(rmi,nu);
+					juego = new MesaJuego(rmi,nu);
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-				try {
 				switch(comboBox_1.getSelectedIndex()){
 				case 0:		
-						rmi.llenarMazo(1);
+						juego.setEstiloCarta(1);
 					break;
 				case 1:
-						rmi.llenarMazo(2);
+						juego.setEstiloCarta(2);
 					break;
-				}
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 				
 				

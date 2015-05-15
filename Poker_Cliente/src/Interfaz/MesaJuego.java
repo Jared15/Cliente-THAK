@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class juego extends JFrame {
+public class MesaJuego extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -37,7 +37,7 @@ public class juego extends JFrame {
 	private JLabel carta5;
 	private JLabel fondo;
 	private String path;
-	private List<String> cartas= new ArrayList<String>();;
+	private List<String> cartas= new ArrayList<String>();
 	
 	
 	JLabel avatar1;
@@ -50,8 +50,17 @@ public class juego extends JFrame {
 	JLabel ficha;
 	
 	int idJugador;
+	int estiloCarta;
 	
 	
+	public int getEstiloCarta() {
+		return estiloCarta;
+	}
+
+	public void setEstiloCarta(int estiloCarta) {
+		this.estiloCarta = estiloCarta;
+	}
+
 	RMI rmi;
 	List<String> mesa= new ArrayList<String>();
 	List<List<String>> listaJugadores;
@@ -88,10 +97,13 @@ public class juego extends JFrame {
 	 * Create the frame.
 	 * @throws RemoteException 
 	 */
-	public juego(RMI rmi1,String nu1) throws RemoteException {	
+	public MesaJuego(RMI rmi1,String nu1) throws RemoteException {	
+		
+		
 		rmi=rmi1;
 		this.nu=nu1;
 		
+		rmi.llenarMazo(1);
 		listaJugadores= rmi.getListaJugadores();
 		
 		for(int j=0;j<listaJugadores.size();j++){
@@ -127,7 +139,11 @@ public class juego extends JFrame {
 		JButton btnEmpezar = new JButton("Primeras 3");
 		btnEmpezar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			cambiarCartas();
+				try {
+					rmi.mostrarPrimeras3();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 			   
 			}
 		});
@@ -137,8 +153,12 @@ public class juego extends JFrame {
 		JButton btnCuarta = new JButton("Cuarta");
 		btnCuarta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-			   cuarta();
+				try {
+					rmi.mostrarCuarta();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnCuarta.setBounds(23, 100, 117, 25);
@@ -147,8 +167,12 @@ public class juego extends JFrame {
 		JButton btnQuinta = new JButton("Quinta");
 		btnQuinta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-			   quinta();
+				try {
+					rmi.mostrarQuinta();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnQuinta.setBounds(23, 140, 117, 25);
@@ -246,14 +270,52 @@ public class juego extends JFrame {
 				}
 			}
 		});
+		//BOTONES APOSTAR
+		JButton apostarBtn1 = new JButton();
+		apostarBtn1.setBackground(new Color(0, 0, 0));
+		apostarBtn1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		apostarBtn1.setBounds(637, 500, 50, 50);
+		apostarBtn1.setIcon(new ImageIcon("Botones/retirarse.png"));
+		panel.add(apostarBtn1);
+		
+		
+		JButton apostarBtn2 = new JButton();
+		apostarBtn2.setBackground(new Color(0, 0, 0));
+		apostarBtn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		apostarBtn2.setBounds(731, 500, 50, 50);
+		apostarBtn2.setIcon(new ImageIcon("Botones/pasar.png"));
+		panel.add(apostarBtn2);
+		
+		JButton apostarBtn3 = new JButton();
+		apostarBtn3.setBackground(new Color(0, 0, 0));
+		apostarBtn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		apostarBtn3.setBounds(820, 500, 50, 50);
+		apostarBtn3.setIcon(new ImageIcon("Botones/subir.png"));
+		panel.add(apostarBtn3);
+
+		
+		
 		btnEmpezar_1.setBounds(23, 177, 117, 25);
 		panel.add(btnEmpezar_1);
 		fondo = new JLabel("");
+		fondo.setBackground(new Color(128, 0, 0));
 		panel.add(fondo);
 		
 		fondo.setBounds(0,0, 1500, 1000);
 		
-
+		
 	}
 	
 	
@@ -261,14 +323,14 @@ public class juego extends JFrame {
 	 * muestra las primeras 3 cartas del juego en la mesa
 	 */
 	public void cambiarCartas(){
-		c = new ImageIcon(cartas.get(0));
+		c = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(0)+".png");
 
 		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
 		carta1.setIcon(icono);
-		c = new ImageIcon(cartas.get(1));
+		c = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(1)+".png");
 		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
 		carta2.setIcon(icono);
-		c = new ImageIcon(cartas.get(2));
+		c = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(2)+".png");
 		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
 		carta3.setIcon(icono);
 	}
@@ -277,7 +339,7 @@ public class juego extends JFrame {
 	 * muestra la 4ta carta del juego en la mesa
 	 */
 	public void cuarta(){
-		c = new ImageIcon(cartas.get(3));
+		c = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(3)+".png");
 		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
 		carta4.setIcon(icono);
 	}
@@ -288,7 +350,7 @@ public class juego extends JFrame {
 	 */
 	public void quinta(){
 
-		c = new ImageIcon(cartas.get(4));
+		c = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(4)+".png");
 		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
 		carta5.setIcon(icono);
 		
@@ -505,55 +567,57 @@ public class juego extends JFrame {
 		
 		switch(idJugador){
 		case 1:
-			iic = new ImageIcon(cartas.get(5));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(5)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta11.setIcon(ic);
-			iic = new ImageIcon(cartas.get(6));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(6)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta12.setIcon(ic);
 			break;
 		case 2:
-			iic = new ImageIcon(cartas.get(7));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(7)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta21.setIcon(ic);
-			iic = new ImageIcon(cartas.get(8));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(8)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta22.setIcon(ic);
 			break;
 		case 3:
-			iic = new ImageIcon(cartas.get(9));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(9)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta31.setIcon(ic);
-			iic = new ImageIcon(cartas.get(10));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(10)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta32.setIcon(ic);
 			break;
 		case 4:
-			iic = new ImageIcon(cartas.get(11));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(11)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta41.setIcon(ic);
-			iic = new ImageIcon(cartas.get(12));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(12)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta42.setIcon(ic);
 			break;
 		case 5:
-			iic = new ImageIcon(cartas.get(13));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(13)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta51.setIcon(ic);
-			iic = new ImageIcon(cartas.get(14));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(14)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta52.setIcon(ic);
 			break;
 		case 6:
-			iic = new ImageIcon(cartas.get(15));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(15)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta61.setIcon(ic);
-			iic = new ImageIcon(cartas.get(16));
+			iic = new ImageIcon("Cartas/Cartas-"+estiloCarta+"/"+cartas.get(16)+".png");
 			ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
 			carta62.setIcon(ic);
 			break;
 		}
 	}
+
+
 }
 
 

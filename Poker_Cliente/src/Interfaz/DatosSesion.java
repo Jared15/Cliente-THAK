@@ -21,10 +21,10 @@ import Conexion.RMI;
 
 import javax.swing.JComboBox;
 
-public class sesion extends JFrame {
+public class DatosSesion extends JFrame {
 
 	private JPanel contentPane;
-	private juego juego;
+	private MesaJuego juego;
 	private ConfiguracionCuenta cc;
 	ConfiguracionMesa cm;
 	JLabel lblNewLabel;
@@ -56,7 +56,7 @@ public class sesion extends JFrame {
 	 * Create the frame.
 	 * @throws RemoteException 
 	 */
-	public sesion(RMI rmi1, String nombreUsuario) throws RemoteException {
+	public DatosSesion(RMI rmi1, String nombreUsuario) throws RemoteException {
 		nu=nombreUsuario;
 		rmi=rmi1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -173,11 +173,11 @@ public class sesion extends JFrame {
 		mostrarAvatarSesion(nombreUsuario);
 	}
 	
-public juego getJuego() {
+public MesaJuego getJuego() {
 		return juego;
 	}
 
-	public void setJuego(juego juego) {
+	public void setJuego(MesaJuego juego) {
 		this.juego = juego;
 	}
 	

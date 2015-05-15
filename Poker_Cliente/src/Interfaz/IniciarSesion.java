@@ -23,21 +23,21 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class PokerInterfaz extends JFrame {
+public class IniciarSesion extends JFrame {
 
 	private JPanel panel;
 	private JTextField campoUsuario;
 	private JPasswordField campoContrasena;
 	private JLabel label;
 	private JLabel fondo;
-	private sesion sesion;
-	public sesion getSesion() {
+	private DatosSesion sesion;
+	public DatosSesion getSesion() {
 		return sesion;
 	}
 
 
 
-	public void setSesion(sesion sesion) {
+	public void setSesion(DatosSesion sesion) {
 		this.sesion = sesion;
 	}
 
@@ -51,7 +51,7 @@ public class PokerInterfaz extends JFrame {
 	
 	
 	
-	public PokerInterfaz(RMI rmi1)  {
+	public IniciarSesion(RMI rmi1)  {
 		rmi=rmi1;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,14 +88,15 @@ public class PokerInterfaz extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				if(rmi.verificarJugador(campoUsuario.getText(), campoContrasena.getText())){
-				sesion= new sesion(rmi,campoUsuario.getText());
+				sesion= new DatosSesion(rmi,campoUsuario.getText());
 				sesion.setVisible(true);
+				setVisible(false);
 				}else
 					JOptionPane.showMessageDialog(null, "El Usuario o la contrasena no son Validos");
 				
 					
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}
