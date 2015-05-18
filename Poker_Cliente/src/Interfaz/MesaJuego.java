@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JTextField;
 
 public class MesaJuego extends JFrame {
 
@@ -39,6 +40,9 @@ public class MesaJuego extends JFrame {
 	private String path;
 	private List<String> cartas= new ArrayList<String>();
 	
+	private JButton apostarBtn1;
+	private JButton apostarBtn2;
+	private JButton apostarBtn3;
 	
 	JLabel avatar1;
 	JLabel avatar2;
@@ -51,6 +55,9 @@ public class MesaJuego extends JFrame {
 	
 	int idJugador;
 	int estiloCarta;
+	
+	private List<JLabel> dineroJugadores=new ArrayList<JLabel>();
+	private List<JLabel> apuestaJugadores=new ArrayList<JLabel>();
 	
 	
 	public int getEstiloCarta() {
@@ -89,6 +96,8 @@ public class MesaJuego extends JFrame {
 	private JLabel carta61;
 	private JLabel carta62;
 	private JButton btnEmpezar_1;
+	private JTextField textCantidad;
+	
 	
 	/**
 	 * Launch the application.
@@ -109,7 +118,7 @@ public class MesaJuego extends JFrame {
 		for(int j=0;j<listaJugadores.size();j++){
 			if(listaJugadores.get(j).get(0).equalsIgnoreCase(nu)){
 				idJugador=j+1;
-			}
+			}			
 		}
 		
 		
@@ -262,7 +271,7 @@ public class MesaJuego extends JFrame {
 		btnEmpezar_1 = new JButton("Empezar");
 		btnEmpezar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
+				try {					
 					rmi.getListaCartasMesa();
 					
 				} catch (RemoteException e) {
@@ -271,7 +280,7 @@ public class MesaJuego extends JFrame {
 			}
 		});
 		//BOTONES APOSTAR
-		JButton apostarBtn1 = new JButton();
+		apostarBtn1 = new JButton();
 		apostarBtn1.setBackground(new Color(0, 0, 0));
 		apostarBtn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -283,22 +292,34 @@ public class MesaJuego extends JFrame {
 		panel.add(apostarBtn1);
 		
 		
-		JButton apostarBtn2 = new JButton();
+		apostarBtn2 = new JButton();
 		apostarBtn2.setBackground(new Color(0, 0, 0));
 		apostarBtn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {					
+					rmi.pasarTurno();					
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}	
 			}
 		});
 		apostarBtn2.setBounds(731, 500, 50, 50);
 		apostarBtn2.setIcon(new ImageIcon("Botones/pasar.png"));
 		panel.add(apostarBtn2);
 		
-		JButton apostarBtn3 = new JButton();
+		apostarBtn3 = new JButton();
 		apostarBtn3.setBackground(new Color(0, 0, 0));
 		apostarBtn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				int dinero=Integer.parseInt(textCantidad.getText().trim());
+				int dineroJug=Integer.parseInt(dineroJugadores.get(idJugador-1).getText().trim());
+				if(dinero<=dineroJug){
+					try {					
+						rmi.apostar(idJugador,dinero);					
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}	
+				}
 			}
 		});
 		apostarBtn3.setBounds(820, 500, 50, 50);
@@ -313,9 +334,99 @@ public class MesaJuego extends JFrame {
 		fondo.setBackground(new Color(128, 0, 0));
 		panel.add(fondo);
 		
-		fondo.setBounds(0,0, 1500, 1000);
+		fondo.setBounds(-83,0, 1500, 1000);
 		
+		JButton btnSigRonda = new JButton("siguiente ronda");
+		btnSigRonda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					rmi.siguienteRonda();
+				} catch (RemoteException e) {					
+					e.printStackTrace();
+				}
+			}
+		});
+		btnSigRonda.setBounds(23, 215, 117, 23);
+		panel.add(btnSigRonda);
 		
+		llenarDinero();
+		for(int j=0;j<listaJugadores.size();j++){			
+			dineroJugadores.get(j).setText(listaJugadores.get(j).get(1));
+		}
+			
+		
+	}
+
+	/**
+	 * 
+	 */
+	private void llenarDinero() {
+		JLabel dinero1 = new JLabel("0");
+		dinero1.setBounds(50, 925, 46, 14);
+		panel.add(dinero1);
+		
+		JLabel dinero2= new JLabel("0");		
+		dinero2.setBounds(124, 925, 46, 14);
+		panel.add(dinero2);
+		
+		JLabel dinero3= new JLabel("0");		
+		dinero3.setBounds(198, 925, 46, 14);
+		panel.add(dinero3);
+		
+		JLabel dinero4 = new JLabel("0");
+		dinero4.setBounds(272, 925, 46, 14);
+		panel.add(dinero4);
+		
+		JLabel dinero5= new JLabel("0");		
+		dinero5.setBounds(346, 925, 46, 14);
+		panel.add(dinero5);
+		
+		JLabel dinero6= new JLabel("0");		
+		dinero6.setBounds(420, 925, 46, 14);
+		panel.add(dinero6);
+		
+		dineroJugadores.add(dinero1);
+		dineroJugadores.add(dinero2);
+		dineroJugadores.add(dinero3);
+		dineroJugadores.add(dinero4);
+		dineroJugadores.add(dinero5);
+		dineroJugadores.add(dinero6);
+		
+		JLabel apuesta1 = new JLabel("0");
+		apuesta1.setBounds(50, 900, 46, 14);
+		panel.add(apuesta1);
+		
+		JLabel apuesta2= new JLabel("0");		
+		apuesta2.setBounds(124, 900, 46, 14);
+		panel.add(apuesta2);
+		
+		JLabel apuesta3= new JLabel("0");		
+		apuesta3.setBounds(198, 900, 46, 14);
+		panel.add(apuesta3);
+		
+		JLabel apuesta4 = new JLabel("0");
+		apuesta4.setBounds(272, 900, 46, 14);
+		panel.add(apuesta4);
+		
+		JLabel apuesta5= new JLabel("0");		
+		apuesta5.setBounds(346, 900, 46, 14);
+		panel.add(apuesta5);
+		
+		JLabel apuesta6= new JLabel("0");		
+		apuesta6.setBounds(420, 900, 46, 14);
+		panel.add(apuesta6);
+		
+		apuestaJugadores.add(apuesta1);
+		apuestaJugadores.add(apuesta2);
+		apuestaJugadores.add(apuesta3);
+		apuestaJugadores.add(apuesta4);
+		apuestaJugadores.add(apuesta5);
+		apuestaJugadores.add(apuesta6);
+		
+		textCantidad = new JTextField();
+		textCantidad.setBounds(894, 511, 86, 20);
+		panel.add(textCantidad);
+		textCantidad.setColumns(10);
 	}
 	
 	
@@ -553,9 +664,9 @@ public class MesaJuego extends JFrame {
 		return cartas;
 	}
 
-	public void setCartas(List<String> cartas1) {
+	public void setCartas(List<String> cartas1) {		
 		this.cartas = cartas1;
-	}
+			}
 	
 	
 	/**
@@ -617,7 +728,28 @@ public class MesaJuego extends JFrame {
 		}
 	}
 
+	public void turno(int turno) {
+		if(turno==idJugador){
+			apostarBtn1.setEnabled(true);
+			apostarBtn2.setEnabled(true);
+			apostarBtn3.setEnabled(true);
+		}else{
+			apostarBtn1.setEnabled(false);
+			apostarBtn2.setEnabled(false);
+			apostarBtn3.setEnabled(false);
+		}
+		
+	}
 
+	public void descontar(int jugador, int cantidad) {
+		int dinero=Integer.parseInt(dineroJugadores.get(jugador-1).getText().trim());
+		dinero-=cantidad;
+		dineroJugadores.get(jugador-1).setText(dinero+"");
+		dinero=Integer.parseInt(apuestaJugadores.get(jugador-1).getText().trim());
+		dinero+=cantidad;
+		apuestaJugadores.get(jugador-1).setText(dinero+"");
+		
+	}
 }
 
 

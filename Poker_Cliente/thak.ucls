@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="Controlador.Main" project="Poker_Cliente" 
-    file="/Poker_Cliente/src/Controlador/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="621" y="141"/>    
+  <class id="1" language="java" name="Controlador.Cliente" project="Poker_Cliente" 
+    file="/Poker_Cliente/src/Controlador/Cliente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3916" y="1503"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="Interfaz.sesion" project="Poker_Cliente" 
-    file="/Poker_Cliente/src/Interfaz/sesion.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="364" width="164" x="159" y="393"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="Interfaz.CrearJugador" project="Poker_Cliente" 
+  <class id="2" language="java" name="Interfaz.CrearJugador" project="Poker_Cliente" 
     file="/Poker_Cliente/src/Interfaz/CrearJugador.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="184" width="149" x="-30" y="393"/>    
+    <position height="-1" width="-1" x="3994" y="2020"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="Interfaz.juego" project="Poker_Cliente" 
-    file="/Poker_Cliente/src/Interfaz/juego.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="566" y="820"/>    
+  <class id="3" language="java" name="Interfaz.IniciarSesion" project="Poker_Cliente" 
+    file="/Poker_Cliente/src/Interfaz/IniciarSesion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4160" y="1782"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="Interfaz.DatosPartida" project="Poker_Cliente" 
-    file="/Poker_Cliente/src/Interfaz/DatosPartida.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="42" y="204"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="Interfaz.ConfiguracionCuenta" project="Poker_Cliente" 
+  <class id="4" language="java" name="Interfaz.ConfiguracionCuenta" project="Poker_Cliente" 
     file="/Poker_Cliente/src/Interfaz/ConfiguracionCuenta.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="220" width="164" x="-45" y="797"/>    
+    <position height="-1" width="-1" x="3809" y="2346"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="Interfaz.ConfiguracionMesa" project="Poker_Cliente" 
+  <class id="5" language="java" name="Interfaz.Clasificacion_manos" project="Poker_Cliente" 
+    file="/Poker_Cliente/src/Interfaz/Clasificacion_manos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4260" y="1460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="Interfaz.MesaJuego" project="Poker_Cliente" 
+    file="/Poker_Cliente/src/Interfaz/MesaJuego.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4469" y="3258"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="Interfaz.DatosSesion" project="Poker_Cliente" 
+    file="/Poker_Cliente/src/Interfaz/DatosSesion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4421" y="2125"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="Interfaz.ConfiguracionMesa" project="Poker_Cliente" 
     file="/Poker_Cliente/src/Interfaz/ConfiguracionMesa.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="310" width="157" x="159" y="797"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="Interfaz.PokerInterfaz" project="Poker_Cliente" 
-    file="/Poker_Cliente/src/Interfaz/PokerInterfaz.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="238" width="152" x="122" y="115"/>    
+    <position height="-1" width="-1" x="4171" y="2561"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,67 +75,67 @@
   </class>  
   <association id="9">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="10" name="crear"/>      
+      <attribute id="10" name="juego"/>      
       <multiplicity id="11" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="12">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="13" name="pokerInterfaz"/>      
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="13" name="cm"/>      
       <multiplicity id="14" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="15">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="16" name="juego"/>      
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="16" name="sesion"/>      
       <multiplicity id="17" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="18">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="19" name="Cm"/>      
+    <bendpoint x="4532" y="2350"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="19" name="juego"/>      
       <multiplicity id="20" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="22" name="cm"/>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="24">    
-    <bendpoint x="346" y="797"/>    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="25" name="juego"/>      
-      <multiplicity id="26" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="28" name="cc"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="31" name="sesion"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
+  <association id="21">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="22" name="cc"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="24">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="25" name="crear"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="27">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="28" name="Cm"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="31" name="pokerInterfaz"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

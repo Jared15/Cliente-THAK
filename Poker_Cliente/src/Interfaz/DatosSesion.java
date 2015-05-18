@@ -102,6 +102,7 @@ public class DatosSesion extends JFrame {
 				
 				cm= new ConfiguracionMesa(rmi,nu);
 				cm.setVisible(true);
+				setVisible(false);
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
