@@ -187,4 +187,9 @@ public class ConfiguracionMesa extends JFrame {
 		label_1.setBounds(621, 157, 132, 22);
 		contentPane.add(label_1);
 	}
+
+	public void ganador(int ganador) {
+		juego.ganador(ganador);
+		
+	}
 }

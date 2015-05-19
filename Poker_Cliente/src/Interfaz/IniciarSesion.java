@@ -126,4 +126,11 @@ public class IniciarSesion extends JFrame {
 		panel.add(fondo);
 	}
 
+
+
+	public void ganador(int ganador) {
+		sesion.ganador(ganador);
+		
+	}
+
 }

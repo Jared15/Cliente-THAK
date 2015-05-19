@@ -11,6 +11,7 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import Conexion.RMI;
 
@@ -25,7 +26,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JTextField;
+import java.awt.Font;
 
 public class MesaJuego extends JFrame {
 
@@ -97,6 +100,7 @@ public class MesaJuego extends JFrame {
 	private JLabel carta62;
 	private JButton btnEmpezar_1;
 	private JTextField textCantidad;
+	private JLabel lblGanador;
 	
 	
 	/**
@@ -142,6 +146,12 @@ public class MesaJuego extends JFrame {
 			   
 			}
 		});
+		
+		lblGanador = new JLabel("Ganador");
+		lblGanador.setFont(new Font("Tahoma", Font.PLAIN, 71));
+		lblGanador.setBounds(395, 219, 865, 76);
+		panel.add(lblGanador);
+		lblGanador.setVisible(false);
 		btnSalir.setBounds(23, 24, 117, 25);
 		panel.add(btnSalir);
 		
@@ -271,7 +281,8 @@ public class MesaJuego extends JFrame {
 		btnEmpezar_1 = new JButton("Empezar");
 		btnEmpezar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {					
+				try {
+					rmi.llenarMazo(1);
 					rmi.getListaCartasMesa();
 					
 				} catch (RemoteException e) {
@@ -284,7 +295,11 @@ public class MesaJuego extends JFrame {
 		apostarBtn1.setBackground(new Color(0, 0, 0));
 		apostarBtn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {					
+					rmi.retirarse(idJugador);;				
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}	
 			}
 		});
 		apostarBtn1.setBounds(637, 500, 50, 50);
@@ -297,7 +312,7 @@ public class MesaJuego extends JFrame {
 		apostarBtn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {					
-					rmi.pasarTurno();					
+					rmi.apostar(idJugador,0);				
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}	
@@ -319,6 +334,8 @@ public class MesaJuego extends JFrame {
 					} catch (RemoteException e) {
 						e.printStackTrace();
 					}	
+				}else{
+					System.out.println("dinero insuficiente");
 				}
 			}
 		});
@@ -330,11 +347,6 @@ public class MesaJuego extends JFrame {
 		
 		btnEmpezar_1.setBounds(23, 177, 117, 25);
 		panel.add(btnEmpezar_1);
-		fondo = new JLabel("");
-		fondo.setBackground(new Color(128, 0, 0));
-		panel.add(fondo);
-		
-		fondo.setBounds(-83,0, 1500, 1000);
 		
 		JButton btnSigRonda = new JButton("siguiente ronda");
 		btnSigRonda.addActionListener(new ActionListener() {
@@ -346,14 +358,47 @@ public class MesaJuego extends JFrame {
 				}
 			}
 		});
-		btnSigRonda.setBounds(23, 215, 117, 23);
+		btnSigRonda.setBounds(143, 24, 117, 23);
 		panel.add(btnSigRonda);
+		
+		JButton btnSiguienteMano = new JButton("siguiente mano");
+		btnSiguienteMano.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					lblGanador.setVisible(false);
+					rmi.llenarMazo(1);
+					rmi.getListaCartasMesa();					
+				} catch (RemoteException e) {					
+					e.printStackTrace();
+				}
+			}
+
+			
+		});
+		btnSiguienteMano.setBounds(143, 61, 117, 23);
+		panel.add(btnSiguienteMano);
+		fondo = new JLabel("");
+		fondo.setBackground(new Color(128, 0, 0));
+		panel.add(fondo);
+		
+		fondo.setBounds(-83,0, 1500, 1000);
 		
 		llenarDinero();
 		for(int j=0;j<listaJugadores.size();j++){			
 			dineroJugadores.get(j).setText(listaJugadores.get(j).get(1));
 		}
 			
+		
+	}
+	
+	private void iniciarCartas() {
+		c =new ImageIcon("reverso.png");
+		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
+		carta1.setIcon(icono);
+		carta2.setIcon(icono);
+		carta3.setIcon(icono);
+		carta4.setIcon(icono);
+		carta5.setIcon(icono);
 		
 	}
 
@@ -427,6 +472,7 @@ public class MesaJuego extends JFrame {
 		textCantidad.setBounds(894, 511, 86, 20);
 		panel.add(textCantidad);
 		textCantidad.setColumns(10);
+		
 	}
 	
 	
@@ -748,6 +794,12 @@ public class MesaJuego extends JFrame {
 		dinero=Integer.parseInt(apuestaJugadores.get(jugador-1).getText().trim());
 		dinero+=cantidad;
 		apuestaJugadores.get(jugador-1).setText(dinero+"");
+		
+	}
+
+	public void ganador(int ganador) {
+		lblGanador.setText("GANADOR jugador "+ganador);
+		lblGanador.setVisible(true);
 		
 	}
 }

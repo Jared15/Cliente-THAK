@@ -42,21 +42,19 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 
 			int accion = (int) ((List<Object>) updateMsg).get(0);
 			int state = (int) ((List<Object>) updateMsg).get(1);
-			if (accion == 0) {
-				System.out.println("---*** ESTADO : " + state + " ***---");
+			System.out.println("---*** ESTADO : " + state + " ***---");
+			if (accion == 0) {				
 				List<String> lj = new ArrayList<String>();
 				switch (state) {
 				case 0:
-					lj = (List<String>) ((List<Object>) updateMsg).get(2);
+					lj = (List<String>) ((List<Object>) updateMsg).get(3);
 					pokerInterfaz.getSesion().getCm().getJuego().setCartas(lj);
-					pokerInterfaz.getSesion().getCm().getJuego()
-							.setVisible(true);
-					pokerInterfaz.getSesion().getCm().getJuego()
-							.mostrarCartasJugador();
+					pokerInterfaz.getSesion().getCm().getJuego().setVisible(true);
+					pokerInterfaz.getSesion().getCm().getJuego().mostrarCartasJugador();
+					pokerInterfaz.getSesion().getCm().getJuego().turno(1);
 					break;
 				case 1:
-					pokerInterfaz.getSesion().getCm().getJuego()
-							.cambiarCartas();
+					pokerInterfaz.getSesion().getCm().getJuego().cambiarCartas();
 
 					break;
 				case 2:
@@ -67,11 +65,16 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 					break;
 				}
 			}else{
-				pokerInterfaz.getSesion().getCm().getJuego().turno(accion);
-				pokerInterfaz.getSesion().getCm().getJuego().descontar(accion,state);
+				if(accion==-1){
+					pokerInterfaz.ganador(state);
+				}else{
+					int turno=(int) ((List<Object>) updateMsg).get(2);					
+					pokerInterfaz.getSesion().getCm().getJuego().turno(turno);
+					if(state>0){
+						pokerInterfaz.getSesion().getCm().getJuego().descontar(accion,state);
+					}			
+				}					
 			}
-			
-
 		}
 	}
 }
