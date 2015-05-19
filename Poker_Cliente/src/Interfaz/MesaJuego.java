@@ -29,6 +29,9 @@ import java.util.Map;
 
 import javax.swing.JTextField;
 import java.awt.Font;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class MesaJuego extends JFrame {
 
@@ -101,6 +104,7 @@ public class MesaJuego extends JFrame {
 	private JButton btnEmpezar_1;
 	private JTextField textCantidad;
 	private JLabel lblGanador;
+	private JSlider slider;
 	
 	
 	/**
@@ -146,6 +150,23 @@ public class MesaJuego extends JFrame {
 			   
 			}
 		});
+		textCantidad = new JTextField();
+		textCantidad.setBounds(894, 511, 86, 20);
+		panel.add(textCantidad);
+		textCantidad.setColumns(10);
+		
+		slider = new JSlider();
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				textCantidad.setText(slider.getValue()+"");
+			}
+		});
+		slider.setMinimum(50);
+		slider.setMaximum(200);
+		slider.setBounds(902, 550, 200, 50);
+		panel.add(slider);
+		
+		
 		
 		lblGanador = new JLabel("Ganador");
 		lblGanador.setFont(new Font("Tahoma", Font.PLAIN, 71));
@@ -381,7 +402,7 @@ public class MesaJuego extends JFrame {
 		fondo.setBackground(new Color(128, 0, 0));
 		panel.add(fondo);
 		
-		fondo.setBounds(-83,0, 1500, 1000);
+		fondo.setBounds(-47,11, 1500, 1000);
 		
 		llenarDinero();
 		for(int j=0;j<listaJugadores.size();j++){			
@@ -467,11 +488,6 @@ public class MesaJuego extends JFrame {
 		apuestaJugadores.add(apuesta4);
 		apuestaJugadores.add(apuesta5);
 		apuestaJugadores.add(apuesta6);
-		
-		textCantidad = new JTextField();
-		textCantidad.setBounds(894, 511, 86, 20);
-		panel.add(textCantidad);
-		textCantidad.setColumns(10);
 		
 	}
 	
