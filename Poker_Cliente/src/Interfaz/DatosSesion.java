@@ -96,6 +96,10 @@ public class DatosSesion extends JFrame {
 		contentPane.add(btnConfiguraciones);
 
 		JButton btnCrear = new JButton("Crear");
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnCrear.setBounds(237, 312, 117, 25);
 		contentPane.add(btnCrear);
 
