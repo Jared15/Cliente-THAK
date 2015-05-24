@@ -59,8 +59,6 @@ public class MesaJuego extends JFrame {
 	JLabel avatar5;
 	JLabel avatar6;
 	
-	
-	
 	int idJugador;
 	int estiloCarta;
 	
@@ -123,6 +121,16 @@ public class MesaJuego extends JFrame {
 	private JLabel fichadinero4;
 	private JLabel fichadinero5;
 	private JLabel fichadinero6;
+	
+	
+	
+	JLabel apuesta1;
+	JLabel apuesta2;
+	JLabel apuesta3;
+	JLabel apuesta4;
+	JLabel apuesta5;
+	JLabel apuesta6;
+	
 	
 	
 	/**
@@ -246,6 +254,43 @@ public class MesaJuego extends JFrame {
 		btnQuinta.setBounds(23, 140, 117, 25);
 		panel.add(btnQuinta);
 		
+		apuesta1 = new JLabel("0");
+		apuesta1.setForeground(SystemColor.text);
+		apuesta1.setFont(new Font("Calibri", Font.BOLD, 25));
+		apuesta1.setBounds(313, 402, 39, 35);
+		
+		apuestaJugadores.add(apuesta1);
+		
+		apuesta2= new JLabel("0");		
+		apuesta2.setForeground(SystemColor.text);
+		apuesta2.setFont(new Font("Calibri", Font.BOLD, 25));
+		apuesta2.setBounds(375+70, 583, 46, 35);
+		apuestaJugadores.add(apuesta2);
+		
+		apuesta3= new JLabel("0");		
+		apuesta3.setForeground(SystemColor.text);
+		apuesta3.setFont(new Font("Calibri", Font.BOLD, 25));
+		apuesta3.setBounds(622-50, 630, 46, 40);
+		apuestaJugadores.add(apuesta3);
+		
+		apuesta4 = new JLabel("0");
+		apuesta4.setForeground(SystemColor.text);
+		apuesta4.setFont(new Font("Calibri", Font.BOLD, 25));
+		apuesta4.setBounds(850, 630, 46, 35);
+		apuestaJugadores.add(apuesta4);
+		
+		apuesta5= new JLabel("0");		
+		apuesta5.setForeground(SystemColor.text);
+		apuesta5.setFont(new Font("Calibri", Font.BOLD, 25));
+		apuesta5.setBounds(1056, 583, 46, 25);
+		apuestaJugadores.add(apuesta5);
+		
+		apuesta6= new JLabel("0");		
+		apuesta6.setForeground(SystemColor.text);
+		apuesta6.setFont(new Font("Calibri", Font.BOLD, 25));
+		apuesta6.setBounds(1085, 407, 46, 25);
+		apuestaJugadores.add(apuesta6);
+		
 		
 		
 		
@@ -253,6 +298,11 @@ public class MesaJuego extends JFrame {
 		dealer.setIcon(new ImageIcon("dealer1.png"));
 		dealer.setBounds(676, 39, 208, 199);
 		panel.add(dealer);
+		
+		ficha = new JLabel("");
+		ficha.setIcon(new ImageIcon("avatares/halo.png"));
+		panel.add(ficha);
+		setFichaJugador();
 		
 		avatar1 = new JLabel("");
 		avatar1.setBounds(50, 290, 160, 220);
@@ -346,10 +396,7 @@ public class MesaJuego extends JFrame {
 		Icon icono1 = new ImageIcon(c1.getImage().getScaledInstance(carta1.getWidth(), carta1.getHeight(), Image.SCALE_DEFAULT));
 		
 		
-		ficha = new JLabel("");
-		ficha.setIcon(new ImageIcon("avatares/halo.png"));
-		panel.add(ficha);
-		setFichaJugador();
+		
 		
 		carta1.setIcon(icono1);
 		panel.add(carta1);
@@ -440,7 +487,7 @@ public class MesaJuego extends JFrame {
 						e.printStackTrace();
 					}	
 				}else{
-					System.out.println("dinero insuficiente");
+					JOptionPane.showMessageDialog(null,"Dinero Insuficiente!");
 				}
 			}
 		});
@@ -453,7 +500,7 @@ public class MesaJuego extends JFrame {
 		btnEmpezar_1.setBounds(23, 177, 117, 25);
 		panel.add(btnEmpezar_1);
 		
-		JButton btnSigRonda = new JButton("siguiente ronda");
+		JButton btnSigRonda = new JButton("Sig Ronda");
 		btnSigRonda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -511,37 +558,6 @@ public class MesaJuego extends JFrame {
 	 * 
 	 */
 	private void llenarDinero() {
-		
-		JLabel apuesta1 = new JLabel("0");
-		apuesta1.setBounds(50, 900, 46, 14);
-		panel.add(apuesta1);
-		
-		JLabel apuesta2= new JLabel("0");		
-		apuesta2.setBounds(124, 900, 46, 14);
-		panel.add(apuesta2);
-		
-		JLabel apuesta3= new JLabel("0");		
-		apuesta3.setBounds(198, 900, 46, 14);
-		panel.add(apuesta3);
-		
-		JLabel apuesta4 = new JLabel("0");
-		apuesta4.setBounds(272, 900, 46, 14);
-		panel.add(apuesta4);
-		
-		JLabel apuesta5= new JLabel("0");		
-		apuesta5.setBounds(346, 900, 46, 14);
-		panel.add(apuesta5);
-		
-		JLabel apuesta6= new JLabel("0");		
-		apuesta6.setBounds(420, 900, 46, 14);
-		panel.add(apuesta6);
-		
-		apuestaJugadores.add(apuesta1);
-		apuestaJugadores.add(apuesta2);
-		apuestaJugadores.add(apuesta3);
-		apuestaJugadores.add(apuesta4);
-		apuestaJugadores.add(apuesta5);
-		apuestaJugadores.add(apuesta6);
 		
 	}
 	
@@ -607,6 +623,9 @@ public class MesaJuego extends JFrame {
 				panel.add(fichadinero1);
 				panel.add(dinero2);
 				panel.add(fichadinero2);
+				
+				panel.add(apuesta1);
+				panel.add(apuesta2);
 				break;
 			case 3:
 				avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
@@ -622,6 +641,11 @@ public class MesaJuego extends JFrame {
 				panel.add(fichadinero2);
 				panel.add(dinero3);
 				panel.add(fichadinero3);
+				
+				panel.add(apuesta1);
+				panel.add(apuesta2);
+				panel.add(apuesta3);
+
 				break;
 			case 4:
 				avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
@@ -641,6 +665,11 @@ public class MesaJuego extends JFrame {
 				panel.add(fichadinero3);
 				panel.add(dinero4);
 				panel.add(fichadinero4);
+				panel.add(apuesta1);
+				panel.add(apuesta2);
+				panel.add(apuesta3);
+				panel.add(apuesta4);
+
 				break;
 			case 5:
 				avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
@@ -664,6 +693,13 @@ public class MesaJuego extends JFrame {
 				panel.add(fichadinero4);
 				panel.add(dinero5);
 				panel.add(fichadinero5);
+				
+				panel.add(apuesta1);
+				panel.add(apuesta2);
+				panel.add(apuesta3);
+				panel.add(apuesta4);
+				panel.add(apuesta5);
+				
 				break;
 			case 6:
 				avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
@@ -692,6 +728,14 @@ public class MesaJuego extends JFrame {
 				panel.add(fichadinero5);
 				panel.add(dinero6);
 				panel.add(fichadinero6);
+				
+				
+				panel.add(apuesta1);
+				panel.add(apuesta2);
+				panel.add(apuesta3);
+				panel.add(apuesta4);
+				panel.add(apuesta5);
+				panel.add(apuesta6);
 				break;
 			
 		}
@@ -755,16 +799,16 @@ public class MesaJuego extends JFrame {
 		carta52.setBounds(1150, 600, 80, 100);
 		
 		carta31 = new JLabel("");
-		carta31.setBounds(560, 660, 80, 100);
+		carta31.setBounds(560, 670, 80, 100);
 		
 		carta32 = new JLabel("");
-		carta32.setBounds(620, 660, 80, 100);
+		carta32.setBounds(620, 670, 80, 100);
 		
 		carta41 = new JLabel("");
-		carta41.setBounds(740, 660, 80, 100);
+		carta41.setBounds(740, 670, 80, 100);
 		
 		carta42 = new JLabel("");
-		carta42.setBounds(800, 660, 80, 100);
+		carta42.setBounds(800, 670, 80, 100);
 		
 		ImageIcon iic = new ImageIcon("reverso.png");
 		Icon ic = new ImageIcon(iic.getImage().getScaledInstance(carta11.getWidth(), carta11.getHeight(), Image.SCALE_DEFAULT));
