@@ -954,6 +954,7 @@ public class MesaJuego extends JFrame {
 	}
 
 	public void turno(int turno) {
+		
 		if(turno==idJugador){
 			apostarBtn1.setEnabled(true);
 			apostarBtn2.setEnabled(true);
@@ -964,6 +965,10 @@ public class MesaJuego extends JFrame {
 			apostarBtn3.setEnabled(false);
 		}
 		
+	}
+	
+	public void minApuesta(int minApuesta){
+		slider.setMinimum(minApuesta);
 	}
 
 	public void descontar(int jugador, int cantidad) {

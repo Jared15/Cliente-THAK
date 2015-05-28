@@ -70,6 +70,10 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 				}else{
 					int turno=(int) ((List<Object>) updateMsg).get(2);					
 					pokerInterfaz.getSesion().getCm().getJuego().turno(turno);
+					if((int) ((List<Object>) updateMsg).get(3)!=0){
+					
+						pokerInterfaz.getSesion().getCm().getJuego().minApuesta((int) ((List<Object>) updateMsg).get(3));
+					}
 					if(state>0){
 						pokerInterfaz.getSesion().getCm().getJuego().descontar(accion,state);
 					}			
