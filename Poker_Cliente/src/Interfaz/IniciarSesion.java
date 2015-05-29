@@ -13,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Conexion.RMI;
+import Controlador.Cliente;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -53,7 +54,7 @@ public class IniciarSesion extends JFrame {
 	
 	
 	
-	public IniciarSesion(RMI rmi1)  {
+	public IniciarSesion(RMI rmi1, final Cliente client)  {
 		rmi=rmi1;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,9 +91,16 @@ public class IniciarSesion extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				if(rmi.verificarJugador(campoUsuario.getText(), campoContrasena.getText())){
-				sesion= new DatosSesion(rmi,campoUsuario.getText());
-				sesion.setVisible(true);
-				setVisible(false);
+					if(rmi.esAdministrador(campoUsuario.getText())){
+						Administrador admin= new Administrador(rmi);
+						admin.setVisible(true);
+					}else{
+						sesion= new DatosSesion(rmi,campoUsuario.getText(),client);
+						sesion.setVisible(true);
+						
+					}
+					setVisible(false);
+					
 				}else
 					JOptionPane.showMessageDialog(null, "El Usuario o la contrasena no son Validos");
 				
@@ -126,6 +134,7 @@ public class IniciarSesion extends JFrame {
 		fondo.setIcon(new ImageIcon("guis/guiAzul.png"));
 		fondo.setBounds(0, 25, 588, 363);
 		panel.add(fondo);
+		getRootPane().setDefaultButton(btnIniciarSesion);
 	}
 
 

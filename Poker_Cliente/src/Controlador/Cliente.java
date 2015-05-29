@@ -18,13 +18,14 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 	private static final long serialVersionUID = 1L;
 	static IniciarSesion pokerInterfaz;
 	static RMI remoteService;
-
+	
+	static Cliente client;
 	public static void main(String[] args) {
 		try {
 			remoteService = (RMI) Naming.lookup("//localhost:9999/RmiService");
-			Cliente client = new Cliente();
-			remoteService.addObserver(client);
-			pokerInterfaz = new IniciarSesion(remoteService);
+			client = new Cliente();
+			remoteService.addObserver(client);			
+			pokerInterfaz = new IniciarSesion(remoteService,client);
 			pokerInterfaz.setVisible(true);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -51,33 +52,56 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 					pokerInterfaz.getSesion().getCm().getJuego().setCartas(lj);
 					pokerInterfaz.getSesion().getCm().getJuego().setVisible(true);
 					pokerInterfaz.getSesion().getCm().getJuego().mostrarCartasJugador();
-					pokerInterfaz.getSesion().getCm().getJuego().turno(1);
+					pokerInterfaz.getSesion().getCm().getJuego().turno(1,0);
 					break;
 				case 1:
 					pokerInterfaz.getSesion().getCm().getJuego().cambiarCartas();
+					
 
 					break;
 				case 2:
 					pokerInterfaz.getSesion().getCm().getJuego().cuarta();
+				
 					break;
 				case 3:
 					pokerInterfaz.getSesion().getCm().getJuego().quinta();
+				
 					break;
 				}
+				pokerInterfaz.getSesion().getCm().getJuego().cambioRonda();
+				
+				
 			}else{
-				if(accion==-1){
-					pokerInterfaz.ganador(state);
-				}else{
-					int turno=(int) ((List<Object>) updateMsg).get(2);					
-					pokerInterfaz.getSesion().getCm().getJuego().turno(turno);
-					if((int) ((List<Object>) updateMsg).get(3)!=0){
+				switch(accion){
+				case -3:
+					if(pokerInterfaz.getSesion()!=null && pokerInterfaz.getSesion().getCm()!=null){
+						pokerInterfaz.getSesion().getCm().actualizarJugadores();
+					}					
+					break;
+				case -2:
+					if(pokerInterfaz.getSesion()!=null && pokerInterfaz.getSesion().getCm()!=null ){
+						pokerInterfaz.getSesion().getCm().iniciarPartida();
+					}					
+					break;
+				case -1:
+					//TODO mostrar cartas de los que estan participando cuando se termina una mano
+					/*List<Integer> participando=(List<Integer>) ((List<Object>) updateMsg).get(2);
+					pokerInterfaz.getSesion().getCm().getJuego().mostrarCartasParticipantes(participando);*/
+					pokerInterfaz.ganador(state);				
+					pokerInterfaz.getSesion().getCm().getJuego().cambioRonda();
+					break;
+				default:
+					int turno=(int) ((List<Object>) updateMsg).get(2);						
+					pokerInterfaz.getSesion().getCm().getJuego().turno(turno,(int) ((List<Object>) updateMsg).get(3));
+					System.out.println(""+(int) ((List<Object>) updateMsg).get(4));//Ronda de apuestas
+			
 					
-						pokerInterfaz.getSesion().getCm().getJuego().minApuesta((int) ((List<Object>) updateMsg).get(3));
-					}
 					if(state>0){
 						pokerInterfaz.getSesion().getCm().getJuego().descontar(accion,state);
-					}			
-				}					
+					}		
+					break;
+				}
+					
 			}
 		}
 	}
