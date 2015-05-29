@@ -1020,7 +1020,7 @@ public class MesaJuego extends JFrame {
 		dinero += cantidad;
 		apuestaJugadores.get(jugador - 1).setText(dinero + "");
 		int pozo = Integer.parseInt(lblPozoCant.getText().trim());
-		pozo += cantidad;
+		pozo += cantidad; 
 		lblPozoCant.setText(pozo + "");
 	}
 
