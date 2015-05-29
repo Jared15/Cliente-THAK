@@ -22,7 +22,7 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 	static Cliente client;
 	public static void main(String[] args) {
 		try {
-			remoteService = (RMI) Naming.lookup("//localhost:9999/RmiService");
+			remoteService = (RMI) Naming.lookup("//10.5.2.39:9999/RmiService");
 			client = new Cliente();
 			remoteService.addObserver(client);			
 			pokerInterfaz = new IniciarSesion(remoteService,client);

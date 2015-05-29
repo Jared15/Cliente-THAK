@@ -1,6 +1,7 @@
 package Interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.DisplayMode;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Label;
@@ -157,7 +158,7 @@ public class MesaJuego extends JFrame {
 		}
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1489, 999);
+		setBounds(100, 100, 13, 999);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -167,6 +168,14 @@ public class MesaJuego extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		panel.setBackground(Color.decode("#3b0707"));
+		
+		DisplayMode dm = new DisplayMode(1336,768,32,DisplayMode.REFRESH_RATE_UNKNOWN);
+		PantallaCompleta pc = new PantallaCompleta();
+
+	       pc.setFullScreen(dm, this);
+		
+		
+		
 
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
@@ -514,6 +523,7 @@ public class MesaJuego extends JFrame {
 		for (int j = 0; j < listaJugadores.size(); j++) {
 			dineroJugadores.get(j).setText(listaJugadores.get(j).get(1));
 		}
+		
 
 	}
 
