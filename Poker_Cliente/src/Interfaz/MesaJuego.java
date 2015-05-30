@@ -41,7 +41,6 @@ import javax.swing.SwingConstants;
 public class MesaJuego extends JFrame {
 
 	JLabel ficha;
-
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel carta1;
@@ -523,7 +522,10 @@ public class MesaJuego extends JFrame {
 		for (int j = 0; j < listaJugadores.size(); j++) {
 			dineroJugadores.get(j).setText(listaJugadores.get(j).get(1));
 		}
-		
+		lblGanador = new JLabel();
+		lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
+		lblGanador.setForeground(Color.WHITE);	
+		lblGanador.setBounds(100, 100, 1000, 100);
 
 	}
 
@@ -1036,15 +1038,13 @@ public class MesaJuego extends JFrame {
 
 	public void ganador(int ganador) {
 		final int ganador1=ganador;
+		lblGanador.setText("GANADOR JUGADOR" + ganador1);
+		panel.add(lblGanador);		
 		new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
-				JLabel lblGanador = new JLabel("GANADOR JUGADOR" + ganador1);
-				lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
-				lblGanador.setForeground(Color.WHITE);	
-				lblGanador.setBounds(100, 100, 1000, 100);
-				panel.add(lblGanador);		
+				
 				 try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
