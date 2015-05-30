@@ -42,7 +42,6 @@ public class MesaJuego extends JFrame {
 
 	JLabel ficha;
 	private JPanel contentPane;
-	private JPanel panel;
 	private JLabel carta1;
 	private JLabel carta2;
 	private JLabel carta3;
@@ -160,41 +159,53 @@ public class MesaJuego extends JFrame {
 		setBounds(200, 50, 1366, 812);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-		panel.setBackground(Color.decode("#3b0707"));
+
+		contentPane.setBackground(Color.decode("#3b0707"));
 		
 		DisplayMode dm = new DisplayMode(1336,768,32,DisplayMode.REFRESH_RATE_UNKNOWN);
 		PantallaCompleta pc = new PantallaCompleta();
 
 	       pc.setFullScreen(dm, this);
+	       contentPane.setLayout(null);
+	       
+	       btnVerJugadores = new JButton("ver jugadores");
+	       btnVerJugadores.addActionListener(new ActionListener() {
+	       	public void actionPerformed(ActionEvent arg0) {
+	       		Jugadores jugadores= new Jugadores(rmi,getClase());
+	       		jugadores.setVisible(true);
+	       	}
+	       	
+	       });
+	       btnVerJugadores.setBounds(23, 60, 121, 23);
+	       contentPane.add(btnVerJugadores);
+	       
+	       		JButton btnSalir = new JButton("Salir");
+	       		btnSalir.addActionListener(new ActionListener() {
+	       			public void actionPerformed(ActionEvent arg0) {
+	       				setVisible(false);
+	       				sesion.setVisible(true);
+	       				
+
+	       			}
+	       		});
+	       		
+	       				btnSalir.setBounds(23, 24, 121, 25);
+	       				contentPane.add(btnSalir);
 		
 		
 	       lblGanador = new JLabel();
 			lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
 			lblGanador.setForeground(Color.WHITE);	
 			lblGanador.setBounds(100, 100, 1000, 100);
-			panel.add(lblGanador);
-
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				sesion.setVisible(true);
-				
-
-			}
-		});
+			contentPane.add(lblGanador);
 		textCantidad = new JTextField();
 		textCantidad.setFont(new Font("Calibri", Font.BOLD, 17));
 		textCantidad.setForeground(SystemColor.text);
 		textCantidad.setBackground(SystemColor.desktop);
 		textCantidad.setBounds(640, 390, 80, 40);
-		panel.add(textCantidad);
+		contentPane.add(textCantidad);
 		textCantidad.setColumns(10);
 
 		slider = new JSlider();
@@ -207,10 +218,7 @@ public class MesaJuego extends JFrame {
 		slider.setMinimum(50);
 		slider.setMaximum(200);
 		slider.setBounds(575, 428, 216, 25);
-		panel.add(slider);
-
-		btnSalir.setBounds(23, 24, 121, 25);
-		panel.add(btnSalir);
+		contentPane.add(slider);
 
 		apuesta1 = new JLabel("0");
 		apuesta1.setForeground(SystemColor.text);
@@ -250,8 +258,9 @@ public class MesaJuego extends JFrame {
 		apuestaJugadores.add(apuesta6);
 
 		ficha = new JLabel("");
+		ficha.setBounds(0, 0, 0, 0);
 		ficha.setIcon(new ImageIcon("avatares/halo.png"));
-		panel.add(ficha);
+		contentPane.add(ficha);
 		setFichaJugador();
 		List<JLabel> usuarios=new ArrayList<JLabel>();
 
@@ -259,42 +268,42 @@ public class MesaJuego extends JFrame {
 		lblUsuario1.setFont(new Font("Calibri", Font.BOLD, 20));
 		lblUsuario1.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario1.setBounds(70, 415, 152, 14);
-		panel.add(lblUsuario1);			
+		contentPane.add(lblUsuario1);			
 		usuarios.add(lblUsuario1);
 		
 		JLabel lblUsuario2 = new JLabel("");
 		lblUsuario2.setFont(new Font("Calibri", Font.BOLD, 20));
 		lblUsuario2.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario2.setBounds(131, 671, 152, 14);
-		panel.add(lblUsuario2);			
+		contentPane.add(lblUsuario2);			
 		usuarios.add(lblUsuario2);
 		
 		JLabel lblUsuario3 = new JLabel("");
 		lblUsuario3.setFont(new Font("Calibri", Font.BOLD, 20));
 		lblUsuario3.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario3.setBounds(450, 740, 132, 14);
-		panel.add(lblUsuario3);			
+		contentPane.add(lblUsuario3);			
 		usuarios.add(lblUsuario3);
 		
 		JLabel lblUsuario4 = new JLabel("");
 		lblUsuario4.setFont(new Font("Calibri", Font.BOLD, 20));
 		lblUsuario4.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario4.setBounds(905, 740, 192, 14);
-		panel.add(lblUsuario4);			
+		contentPane.add(lblUsuario4);			
 		usuarios.add(lblUsuario4);
 		
 		JLabel lblUsuario5 = new JLabel("");
 		lblUsuario5.setFont(new Font("Calibri", Font.BOLD, 20));
 		lblUsuario5.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario5.setBounds(1111, 653, 152, 14);
-		panel.add(lblUsuario5);			
+		contentPane.add(lblUsuario5);			
 		usuarios.add(lblUsuario5);
 		
 		JLabel lblUsuario6 = new JLabel("");
 		lblUsuario6.setFont(new Font("Calibri", Font.BOLD, 20));
 		lblUsuario6.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario6.setBounds(1156, 417, 144, 14);
-		panel.add(lblUsuario6);			
+		contentPane.add(lblUsuario6);			
 		usuarios.add(lblUsuario6);
 
 		for(JLabel l:usuarios){
@@ -393,7 +402,7 @@ public class MesaJuego extends JFrame {
 				carta1.getWidth(), carta1.getHeight(), Image.SCALE_DEFAULT));
 
 		carta1.setIcon(icono1);
-		panel.add(carta1);
+		contentPane.add(carta1);
 
 		carta2 = new JLabel("");
 		carta2.setBounds(540, 260, 80, 100);
@@ -401,7 +410,7 @@ public class MesaJuego extends JFrame {
 		Icon icono2 = new ImageIcon(c2.getImage().getScaledInstance(
 				carta2.getWidth(), carta2.getHeight(), Image.SCALE_DEFAULT));
 		carta2.setIcon(icono2);
-		panel.add(carta2);
+		contentPane.add(carta2);
 
 		carta3 = new JLabel("");
 		carta3.setBounds(640, 260, 80, 100);
@@ -409,7 +418,7 @@ public class MesaJuego extends JFrame {
 		Icon icono3 = new ImageIcon(c3.getImage().getScaledInstance(
 				carta3.getWidth(), carta3.getHeight(), Image.SCALE_DEFAULT));
 		carta3.setIcon(icono3);
-		panel.add(carta3);
+		contentPane.add(carta3);
 
 		carta4 = new JLabel("");
 		carta4.setBounds(740, 260, 80, 100);
@@ -417,7 +426,7 @@ public class MesaJuego extends JFrame {
 		Icon icono4 = new ImageIcon(c4.getImage().getScaledInstance(
 				carta4.getWidth(), carta4.getHeight(), Image.SCALE_DEFAULT));
 		carta4.setIcon(icono4);
-		panel.add(carta4);
+		contentPane.add(carta4);
 
 		carta5 = new JLabel("");
 		carta5.setBounds(840, 260, 80, 100);
@@ -425,7 +434,7 @@ public class MesaJuego extends JFrame {
 		Icon icono5 = new ImageIcon(c5.getImage().getScaledInstance(
 				carta5.getWidth(), carta5.getHeight(), Image.SCALE_DEFAULT));
 		carta5.setIcon(icono5);
-		panel.add(carta5);
+		contentPane.add(carta5);
 		// BOTONES APOSTAR
 		apostarBtn1 = new JButton();
 		apostarBtn1.setBackground(new Color(0, 0, 0));
@@ -441,7 +450,7 @@ public class MesaJuego extends JFrame {
 		});
 		apostarBtn1.setBounds(582, 476, 50, 50);
 		apostarBtn1.setIcon(new ImageIcon("Botones/retirarse.png"));
-		panel.add(apostarBtn1);
+		contentPane.add(apostarBtn1);
 
 		apostarBtn2 = new JButton();
 		apostarBtn2.setBackground(new Color(0, 0, 0));
@@ -456,7 +465,7 @@ public class MesaJuego extends JFrame {
 		});
 		apostarBtn2.setBounds(657, 476, 50, 50);
 		apostarBtn2.setIcon(new ImageIcon("Botones/pasar.png"));
-		panel.add(apostarBtn2);
+		contentPane.add(apostarBtn2);
 
 		apostarBtn3 = new JButton();
 		apostarBtn3.setBackground(new Color(0, 0, 0));
@@ -479,46 +488,35 @@ public class MesaJuego extends JFrame {
 		});
 		apostarBtn3.setBounds(730, 476, 50, 50);
 		apostarBtn3.setIcon(new ImageIcon("Botones/subir.png"));
-		panel.add(apostarBtn3);
+		contentPane.add(apostarBtn3);
 		
 				fondoApuestas = new JLabel("");
 				fondoApuestas.setIcon(new ImageIcon("Botones/apuestas.png"));
 				fondoApuestas.setBounds(564, 375, 235, 90);
-				panel.add(fondoApuestas);
+				contentPane.add(fondoApuestas);
 
 		lblPozoCant = new JLabel("0");
 		lblPozoCant.setForeground(Color.BLACK);
 		lblPozoCant.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPozoCant.setBounds(650, 161, 192, 73);
-		panel.add(lblPozoCant);
+		contentPane.add(lblPozoCant);
 
 		lblPozo = new JLabel("");
 		lblPozo.setForeground(Color.WHITE);
 		lblPozo.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		lblPozo.setBounds(626, 149, 100, 100);
 		lblPozo.setIcon(new ImageIcon("fichapozo.png"));
-		panel.add(lblPozo);
-		
-		btnVerJugadores = new JButton("ver jugadores");
-		btnVerJugadores.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Jugadores jugadores= new Jugadores(rmi,getClase());
-				jugadores.setVisible(true);
-			}
-			
-		});
+		contentPane.add(lblPozo);
 		
 				JLabel dealer = new JLabel("");
 				dealer.setIcon(new ImageIcon("dealer1.png"));
 				dealer.setBounds(583, 0, 208, 182);
-				panel.add(dealer);
-		btnVerJugadores.setBounds(23, 60, 121, 23);
-		panel.add(btnVerJugadores);
+				contentPane.add(dealer);
 		fondo = new JLabel("");
 		fondo.setBackground(new Color(128, 0, 0));
-		panel.add(fondo);
+		contentPane.add(fondo);
 
-		fondo.setBounds(120, 24, 1152, 768);
+		fondo.setBounds(100, 30, 1340, 740);
 		
 		
 
@@ -614,125 +612,125 @@ public class MesaJuego extends JFrame {
 
 		case 2:
 			avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
-			panel.add(avatar1);
+			contentPane.add(avatar1);
 			avatar2.setIcon(new ImageIcon(listaJugadores.get(1).get(3)));
-			panel.add(avatar2);
-			panel.add(avatar2);
-			panel.add(dinero1);
-			panel.add(fichadinero1);
-			panel.add(dinero2);
-			panel.add(fichadinero2);
+			contentPane.add(avatar2);
+			contentPane.add(avatar2);
+			contentPane.add(dinero1);
+			contentPane.add(fichadinero1);
+			contentPane.add(dinero2);
+			contentPane.add(fichadinero2);
 
-			panel.add(apuesta1);
-			panel.add(apuesta2);
+			contentPane.add(apuesta1);
+			contentPane.add(apuesta2);
 			break;
 		case 3:
 			avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
-			panel.add(avatar1);
+			contentPane.add(avatar1);
 			avatar2.setIcon(new ImageIcon(listaJugadores.get(1).get(3)));
-			panel.add(avatar2);
+			contentPane.add(avatar2);
 			avatar3.setIcon(new ImageIcon(listaJugadores.get(2).get(3)));
-			panel.add(avatar3);
+			contentPane.add(avatar3);
 
-			panel.add(dinero1);
-			panel.add(fichadinero1);
-			panel.add(dinero2);
-			panel.add(fichadinero2);
-			panel.add(dinero3);
-			panel.add(fichadinero3);
+			contentPane.add(dinero1);
+			contentPane.add(fichadinero1);
+			contentPane.add(dinero2);
+			contentPane.add(fichadinero2);
+			contentPane.add(dinero3);
+			contentPane.add(fichadinero3);
 
-			panel.add(apuesta1);
-			panel.add(apuesta2);
-			panel.add(apuesta3);
+			contentPane.add(apuesta1);
+			contentPane.add(apuesta2);
+			contentPane.add(apuesta3);
 
 			break;
 		case 4:
 			avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
-			panel.add(avatar1);
+			contentPane.add(avatar1);
 			avatar2.setIcon(new ImageIcon(listaJugadores.get(1).get(3)));
-			panel.add(avatar2);
+			contentPane.add(avatar2);
 			avatar3.setIcon(new ImageIcon(listaJugadores.get(2).get(3)));
-			panel.add(avatar3);
+			contentPane.add(avatar3);
 			avatar4.setIcon(new ImageIcon(listaJugadores.get(3).get(3)));
-			panel.add(avatar4);
+			contentPane.add(avatar4);
 
-			panel.add(dinero1);
-			panel.add(fichadinero1);
-			panel.add(dinero2);
-			panel.add(fichadinero2);
-			panel.add(dinero3);
-			panel.add(fichadinero3);
-			panel.add(dinero4);
-			panel.add(fichadinero4);
-			panel.add(apuesta1);
-			panel.add(apuesta2);
-			panel.add(apuesta3);
-			panel.add(apuesta4);
+			contentPane.add(dinero1);
+			contentPane.add(fichadinero1);
+			contentPane.add(dinero2);
+			contentPane.add(fichadinero2);
+			contentPane.add(dinero3);
+			contentPane.add(fichadinero3);
+			contentPane.add(dinero4);
+			contentPane.add(fichadinero4);
+			contentPane.add(apuesta1);
+			contentPane.add(apuesta2);
+			contentPane.add(apuesta3);
+			contentPane.add(apuesta4);
 
 			break;
 		case 5:
 			avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
-			panel.add(avatar1);
+			contentPane.add(avatar1);
 			avatar2.setIcon(new ImageIcon(listaJugadores.get(1).get(3)));
-			panel.add(avatar2);
+			contentPane.add(avatar2);
 			avatar3.setIcon(new ImageIcon(listaJugadores.get(2).get(3)));
-			panel.add(avatar3);
+			contentPane.add(avatar3);
 			avatar4.setIcon(new ImageIcon(listaJugadores.get(3).get(3)));
-			panel.add(avatar4);
+			contentPane.add(avatar4);
 			avatar5.setIcon(new ImageIcon(listaJugadores.get(4).get(3)));
-			panel.add(avatar5);
+			contentPane.add(avatar5);
 
-			panel.add(dinero1);
-			panel.add(fichadinero1);
-			panel.add(dinero2);
-			panel.add(fichadinero2);
-			panel.add(dinero3);
-			panel.add(fichadinero3);
-			panel.add(dinero4);
-			panel.add(fichadinero4);
-			panel.add(dinero5);
-			panel.add(fichadinero5);
+			contentPane.add(dinero1);
+			contentPane.add(fichadinero1);
+			contentPane.add(dinero2);
+			contentPane.add(fichadinero2);
+			contentPane.add(dinero3);
+			contentPane.add(fichadinero3);
+			contentPane.add(dinero4);
+			contentPane.add(fichadinero4);
+			contentPane.add(dinero5);
+			contentPane.add(fichadinero5);
 
-			panel.add(apuesta1);
-			panel.add(apuesta2);
-			panel.add(apuesta3);
-			panel.add(apuesta4);
-			panel.add(apuesta5);
+			contentPane.add(apuesta1);
+			contentPane.add(apuesta2);
+			contentPane.add(apuesta3);
+			contentPane.add(apuesta4);
+			contentPane.add(apuesta5);
 
 			break;
 		case 6:
 			avatar1.setIcon(new ImageIcon(listaJugadores.get(0).get(3)));
-			panel.add(avatar1);
+			contentPane.add(avatar1);
 			avatar2.setIcon(new ImageIcon(listaJugadores.get(1).get(3)));
-			panel.add(avatar2);
+			contentPane.add(avatar2);
 			avatar3.setIcon(new ImageIcon(listaJugadores.get(2).get(3)));
-			panel.add(avatar3);
+			contentPane.add(avatar3);
 			avatar4.setIcon(new ImageIcon(listaJugadores.get(3).get(3)));
-			panel.add(avatar4);
+			contentPane.add(avatar4);
 			avatar5.setIcon(new ImageIcon(listaJugadores.get(4).get(3)));
-			panel.add(avatar5);
+			contentPane.add(avatar5);
 			avatar6.setIcon(new ImageIcon(listaJugadores.get(5).get(3)));
-			panel.add(avatar6);
+			contentPane.add(avatar6);
 
-			panel.add(dinero1);
-			panel.add(fichadinero1);
-			panel.add(dinero2);
-			panel.add(fichadinero2);
-			panel.add(dinero3);
-			panel.add(fichadinero3);
-			panel.add(dinero4);
-			panel.add(fichadinero4);
-			panel.add(dinero5);
-			panel.add(fichadinero5);
-			panel.add(dinero6);
-			panel.add(fichadinero6);
+			contentPane.add(dinero1);
+			contentPane.add(fichadinero1);
+			contentPane.add(dinero2);
+			contentPane.add(fichadinero2);
+			contentPane.add(dinero3);
+			contentPane.add(fichadinero3);
+			contentPane.add(dinero4);
+			contentPane.add(fichadinero4);
+			contentPane.add(dinero5);
+			contentPane.add(fichadinero5);
+			contentPane.add(dinero6);
+			contentPane.add(fichadinero6);
 
-			panel.add(apuesta1);
-			panel.add(apuesta2);
-			panel.add(apuesta3);
-			panel.add(apuesta4);
-			panel.add(apuesta5);
-			panel.add(apuesta6);
+			contentPane.add(apuesta1);
+			contentPane.add(apuesta2);
+			contentPane.add(apuesta3);
+			contentPane.add(apuesta4);
+			contentPane.add(apuesta5);
+			contentPane.add(apuesta6);
 			break;
 
 		}
@@ -829,55 +827,55 @@ public class MesaJuego extends JFrame {
 
 		case 2:
 
-			panel.add(carta11);
-			panel.add(carta12);
-			panel.add(carta21);
-			panel.add(carta22);
+			contentPane.add(carta11);
+			contentPane.add(carta12);
+			contentPane.add(carta21);
+			contentPane.add(carta22);
 			break;
 		case 3:
-			panel.add(carta11);
-			panel.add(carta12);
-			panel.add(carta21);
-			panel.add(carta22);
-			panel.add(carta31);
-			panel.add(carta32);
+			contentPane.add(carta11);
+			contentPane.add(carta12);
+			contentPane.add(carta21);
+			contentPane.add(carta22);
+			contentPane.add(carta31);
+			contentPane.add(carta32);
 
 			break;
 		case 4:
-			panel.add(carta11);
-			panel.add(carta12);
-			panel.add(carta21);
-			panel.add(carta22);
-			panel.add(carta31);
-			panel.add(carta32);
-			panel.add(carta41);
-			panel.add(carta42);
+			contentPane.add(carta11);
+			contentPane.add(carta12);
+			contentPane.add(carta21);
+			contentPane.add(carta22);
+			contentPane.add(carta31);
+			contentPane.add(carta32);
+			contentPane.add(carta41);
+			contentPane.add(carta42);
 		case 5:
-			panel.add(carta11);
-			panel.add(carta12);
-			panel.add(carta21);
-			panel.add(carta22);
-			panel.add(carta31);
-			panel.add(carta32);
-			panel.add(carta41);
-			panel.add(carta42);
-			panel.add(carta51);
-			panel.add(carta52);
+			contentPane.add(carta11);
+			contentPane.add(carta12);
+			contentPane.add(carta21);
+			contentPane.add(carta22);
+			contentPane.add(carta31);
+			contentPane.add(carta32);
+			contentPane.add(carta41);
+			contentPane.add(carta42);
+			contentPane.add(carta51);
+			contentPane.add(carta52);
 			break;
 		case 6:
 
-			panel.add(carta11);
-			panel.add(carta12);
-			panel.add(carta21);
-			panel.add(carta22);
-			panel.add(carta31);
-			panel.add(carta32);
-			panel.add(carta41);
-			panel.add(carta42);
-			panel.add(carta51);
-			panel.add(carta52);
-			panel.add(carta61);
-			panel.add(carta62);
+			contentPane.add(carta11);
+			contentPane.add(carta12);
+			contentPane.add(carta21);
+			contentPane.add(carta22);
+			contentPane.add(carta31);
+			contentPane.add(carta32);
+			contentPane.add(carta41);
+			contentPane.add(carta42);
+			contentPane.add(carta51);
+			contentPane.add(carta52);
+			contentPane.add(carta61);
+			contentPane.add(carta62);
 			break;
 
 		}
@@ -1066,6 +1064,7 @@ public class MesaJuego extends JFrame {
 	public void cambioRonda() {
 		for(JLabel l:apuestaJugadores){
 			l.setText(0+"");
+			
 		}
 		
 	}

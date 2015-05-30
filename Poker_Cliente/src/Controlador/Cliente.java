@@ -20,6 +20,10 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 	static RMI remoteService;
 	
 	static Cliente client;
+	/**
+	 * 
+	 * @param args parametros enviados desde la ejecucion, no son usados
+	 */
 	public static void main(String[] args) {
 		try {
 			remoteService = (RMI) Naming.lookup("//10.5.2.39:9999/RmiService");
@@ -33,9 +37,14 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 	}
 
 	/**
+
+
 	 * es el que actualiza la interfaz grafica de la partido con el RMI con el
 	 * patron Observer
+	 * @param observable
+	 * @param updateMsg lista de objetos con el identificador del estado del juego
 	 */
+
 	@Override
 	public void update(Object observable, Object updateMsg)
 			throws RemoteException {

@@ -32,7 +32,7 @@ public class ConfiguracionCuenta extends JFrame {
 	private JButton button_2;
 
 	/**
-	 * Create the frame.
+	 * Crea la configuracion cuenta con todos sus componentes
 	 */
 	public ConfiguracionCuenta(RMI rmi1,String nombreUsuario) {
 		nu=nombreUsuario;
@@ -66,7 +66,7 @@ public class ConfiguracionCuenta extends JFrame {
 		contentPane.add(crearLBL_Contrasena);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Homero", "Yoda", "Poker Face","Linux","Mario", "Luigi"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Homero", "Anonimo", "Poker Face","Linux","Mario", "Luigi","mario8bits","mmm"}));
 		comboBox.setBounds(43, 120, 148, 24);
 		contentPane.add(comboBox);
 		
@@ -79,7 +79,7 @@ public class ConfiguracionCuenta extends JFrame {
 					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/homero.png");
 					break;
 				case 1:
-					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/yoda.png");
+					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/anonimo.png");
 					break;
 				case 2:					
 					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/pokerface.png");
@@ -93,6 +93,12 @@ public class ConfiguracionCuenta extends JFrame {
 					break;
 				case 5:
 					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/luigi.png");
+					break;
+				case 6:
+					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/mario8bits.png");
+					break;
+				case 7:
+					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/mmm.png");
 					break;
 				}
 				

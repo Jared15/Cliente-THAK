@@ -29,8 +29,8 @@ public class Administrador extends JFrame {
 
 
 	/**
-	 * Create the frame.
-	 * @param rmi 
+	 * Crea el Frame
+	 * @param rmi Interface con los metodos a utilizar para la conexion con el servidor 
 	 */
 	public Administrador(final RMI rmi) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,7 +109,8 @@ public class Administrador extends JFrame {
 
 
 	/**
-	 * @param rmi
+	 * Crea y llena la tabla "table" con su contenido
+	 * @param rmi Interface con los metodos a utilizar para la conexion con el servidor 
 	 */
 	private void CrearTabla(final RMI rmi) {
 		table = new JTable();
@@ -143,6 +144,10 @@ public class Administrador extends JFrame {
 	     table.setModel(modelo);
 	}
 	
+	/**
+	 * devuelve la instacia que esta corriendo esta clase
+	 * @return
+	 */
 	public Administrador getClase(){
 		return this;
 	}

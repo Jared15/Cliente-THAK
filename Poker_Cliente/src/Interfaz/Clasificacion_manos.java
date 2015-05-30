@@ -18,25 +18,8 @@ import java.awt.Color;
 public class Clasificacion_manos extends JFrame {
 
 	private JPanel contentPane;
-
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Clasificacion_manos frame = new Clasificacion_manos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	 * crea el frame con todo su contenido
 	 */
 	public Clasificacion_manos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,6 +34,9 @@ public class Clasificacion_manos extends JFrame {
 		btnSalir.setForeground(Color.WHITE);
 		btnSalir.setBackground(Color.RED);
 		btnSalir.addActionListener(new ActionListener() {
+			/**
+			 * boton que es llamado para ocultar el frame
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 			}
@@ -63,8 +49,8 @@ public class Clasificacion_manos extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		JLabel etiqueta = new JLabel(); 
         
-        Icon imagen = new ImageIcon ("/manos.png"); 
-        etiqueta.setIcon (new ImageIcon("/home/javier-vasquez/git/Cliente-THAK/Poker_Cliente/manos.png")); 
+        Icon imagen = new ImageIcon ("manos.png"); 
+        etiqueta.setIcon (new ImageIcon("manos.png")); 
         contentPane.add(scrollPane); 
         scrollPane.setViewportView(etiqueta); 
 		

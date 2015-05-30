@@ -31,7 +31,7 @@ public class Jugadores extends JFrame {
 	 * @param rmi 
 	 */
 	public Jugadores(RMI rmi1,MesaJuego mesa) {
-		this.rmi=rmi;
+		this.rmi=rmi1;
 		this.mesa=mesa;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 473);

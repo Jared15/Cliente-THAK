@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ import Conexion.RMI;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -72,7 +74,7 @@ public class CrearJugador extends JFrame {
 						rmi.crearJugador(crearTF_Nombre.getText(), textField.getText(),"avatares/homero.png");
 						break;
 					case 1:
-						rmi.crearJugador(crearTF_Nombre.getText(), textField.getText(),"avatares/yoda.png");
+						rmi.crearJugador(crearTF_Nombre.getText(), textField.getText(),"avatares/anonimo.png");
 						break;
 					case 2:
 						rmi.crearJugador(crearTF_Nombre.getText(), textField.getText(),"avatares/pokerface.png");
@@ -85,6 +87,12 @@ public class CrearJugador extends JFrame {
 						break;
 					case 5:
 						rmi.crearJugador(crearTF_Nombre.getText(), textField.getText(),"avatares/luigi.png");
+						break;
+					case 6:
+						rmi.crearJugador(crearTF_Nombre.getText(), textField.getText(),"avatares/mario8bits.png");
+						break;
+					case 7:
+						rmi.crearJugador(crearTF_Nombre.getText(), textField.getText(),"avatares/mmm.png");
 						break;
 					}
 					JOptionPane.showMessageDialog(null, "Se creo exitosamente el jugador "+crearTF_Nombre.getText());
@@ -111,12 +119,17 @@ public class CrearJugador extends JFrame {
 		contentPane.add(button);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Homero", "Yoda", "Poker Face","Linux","Mario", "Luigi"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Homero", "Anonimo", "Poker Face","Linux","Mario", "Luigi","mario8bits","mmm"}));
 		comboBox.setBounds(43, 162, 206, 24);
 		contentPane.add(comboBox);
 		
 		JLabel lblAvatar = new JLabel("Avatar");
 		lblAvatar.setBounds(43, 148, 206, 15);
 		contentPane.add(lblAvatar);
+		
+		JLabel lblNewLabel7 = new JLabel("");
+		lblNewLabel7.setBounds(5, 18, 714, 388);
+		contentPane.add(lblNewLabel7);
+		lblNewLabel7.setIcon(new ImageIcon("guis/guiAzul.png"));
 	}
 }

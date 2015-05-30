@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -17,11 +18,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.html.HTMLDocument.RunElement;
 
 import Conexion.RMI;
 import Controlador.Cliente;
 
 import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 
 public class DatosSesion extends JFrame {
 
@@ -89,33 +92,33 @@ public class DatosSesion extends JFrame {
 		});
 
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Azul",
-				"Rojo", "Verde", "Morado" }));
-		comboBox.setBounds(384, 18, 136, 16);
-		contentPane.add(comboBox);
-
-		JButton btnNewButton = new JButton("OK");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				lblNewLabel.setIcon(new ImageIcon("guis/gui"
 						+ (String) comboBox.getSelectedItem() + ".png"));
 			}
 		});
-		btnNewButton.setBounds(531, 18, 54, 16);
-		contentPane.add(btnNewButton);
-		btnConfiguraciones.setBounds(81, 349, 206, 25);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Azul",
+				"Rojo", "Verde", "Morado" }));
+		comboBox.setBounds(384, 18, 136, 16);
+		contentPane.add(comboBox);
+		btnConfiguraciones.setBounds(81, 349, 117, 25);
 		contentPane.add(btnConfiguraciones);
 
-		JButton btnCrear = new JButton("Crear");
+		JButton btnCrear = new JButton("Manual");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {
+					Runtime.getRuntime().exec("cmd /c start manual.pdf" );
+				} catch (IOException e) {				
+					e.printStackTrace();
+				}
 			}
 		});
 		btnCrear.setBounds(237, 312, 117, 25);
 		contentPane.add(btnCrear);
 
-		JButton btnUnirse = new JButton("Unirse");
+		JButton btnUnirse = new JButton("Jugar");
 		btnUnirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -159,7 +162,7 @@ public class DatosSesion extends JFrame {
 
 			}
 		});
-		button.setBounds(299, 349, 206, 25);
+		button.setBounds(237, 349, 110, 25);
 		contentPane.add(button);
 
 		JButton btnManos = new JButton("Manos");
@@ -206,6 +209,21 @@ public class DatosSesion extends JFrame {
 		label_3.setFont(new Font("Arial Black", Font.BOLD, 20));
 		label_3.setBounds(260, 230, 216, 29);
 		contentPane.add(label_3);
+		
+		JButton btnTomarNotas = new JButton("Tomar Notas");
+		btnTomarNotas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nota=JOptionPane.showInputDialog("esciba aqui", null);
+				try {
+					rmi.agregarNota(nota,nu);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnTomarNotas.setBounds(387, 350, 118, 23);
+		contentPane.add(btnTomarNotas);
 
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(5, 18, 714, 388);
