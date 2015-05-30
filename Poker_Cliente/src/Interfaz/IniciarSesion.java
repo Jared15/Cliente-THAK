@@ -25,6 +25,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
 
 public class IniciarSesion extends JFrame {
 
@@ -66,6 +67,8 @@ public class IniciarSesion extends JFrame {
 	 * @param client Intancia de Cliente asociado a IniciarSesion
 	 */
 	public IniciarSesion(RMI rmi1, final Cliente client)  {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Thak");
 		rmi=rmi1;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
