@@ -94,6 +94,8 @@ public class Administrador extends JFrame {
 		btnRevisarReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Reportes reporte=new Reportes(rmi,getClase());
+				reporte.setVisible(true);
+				setVisible(false);
 			}
 		});
 		btnRevisarReportes.setBounds(395, 298, 121, 23);
