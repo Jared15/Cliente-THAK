@@ -86,5 +86,4 @@ public class Reportes extends JFrame {
 	     btnCerrar.setBounds(213, 298, 89, 23);
 	     contentPane.add(btnCerrar);
 	}
-
 }
