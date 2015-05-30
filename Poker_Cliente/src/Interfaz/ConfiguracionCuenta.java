@@ -37,6 +37,13 @@ public class ConfiguracionCuenta extends JFrame {
 	public ConfiguracionCuenta(RMI rmi1,String nombreUsuario) {
 		nu=nombreUsuario;
 		this.rmi=rmi1;
+		String pass=null;
+		try {
+			pass=rmi.getPass(nu);
+		} catch (RemoteException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 406, 314);
 		contentPane = new JPanel();
@@ -49,7 +56,7 @@ public class ConfiguracionCuenta extends JFrame {
 		crearLBL_Nombre.setBounds(43, 45, 206, 15);
 		contentPane.add(crearLBL_Nombre);
 		
-		passActualizar_TF = new JTextField();
+		passActualizar_TF = new JTextField(pass);
 		passActualizar_TF.setBounds(43, 67, 148, 19);
 		contentPane.add(passActualizar_TF);
 		passActualizar_TF.setColumns(10);
@@ -74,9 +81,8 @@ public class ConfiguracionCuenta extends JFrame {
 				case 1:
 					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/yoda.png");
 					break;
-				case 2:
-					
-						rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/pokerface.png");
+				case 2:					
+					rmi.actualizarJugador(nu,passActualizar_TF.getText(),"avatares/pokerface.png");
 					
 					break;
 				case 3:

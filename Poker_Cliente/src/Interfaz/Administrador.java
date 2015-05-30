@@ -57,7 +57,7 @@ public class Administrador extends JFrame {
 				
 			}
 		});
-		btnEliminarJugador.setBounds(10, 298, 130, 23);
+		btnEliminarJugador.setBounds(10, 298, 111, 23);
 		contentPane.add(btnEliminarJugador);
 		
 		JButton btnBloquearJugador = new JButton("Bloquear Jugador");
@@ -73,8 +73,31 @@ public class Administrador extends JFrame {
 				}
 			}
 		});
-		btnBloquearJugador.setBounds(150, 298, 138, 23);
+		btnBloquearJugador.setBounds(131, 298, 122, 23);
 		contentPane.add(btnBloquearJugador);
+		
+		JButton btnGenerarReporte = new JButton("Generar Reporte");
+		btnGenerarReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Double promedio=rmi.promedioGanadas();
+					JOptionPane.showMessageDialog(null, "Promedio de partidas ganadas: "+promedio);
+				} catch (RemoteException e) {					
+					e.printStackTrace();
+				}
+			}
+		});
+		btnGenerarReporte.setBounds(263, 298, 122, 23);
+		contentPane.add(btnGenerarReporte);
+		
+		JButton btnRevisarReportes = new JButton("Revisar Reportes");
+		btnRevisarReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Reportes reporte=new Reportes(rmi,getClase());
+			}
+		});
+		btnRevisarReportes.setBounds(395, 298, 121, 23);
+		contentPane.add(btnRevisarReportes);
 		
 		
 		JLabel fondo = new JLabel("");
@@ -118,5 +141,9 @@ public class Administrador extends JFrame {
 			modelo.addRow(object);
 		}
 	     table.setModel(modelo);
+	}
+	
+	public Administrador getClase(){
+		return this;
 	}
 }

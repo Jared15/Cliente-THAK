@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.swing.JTextField;
+
 public class ConfiguracionMesa extends JFrame {
 
 	private JPanel contentPane;
@@ -42,6 +44,8 @@ public class ConfiguracionMesa extends JFrame {
 	private JComboBox comboBox_1;
 	private JLabel label_1;
 	private DatosSesion sesion;
+	private JTextField textField;
+	private String fondo;
 
 	public MesaJuego getJuego() {
 		return juego;
@@ -51,11 +55,12 @@ public class ConfiguracionMesa extends JFrame {
 		this.juego = juego;
 	}
 
-	public ConfiguracionMesa(RMI rmi1, String nu1, final DatosSesion sesion)
+	public ConfiguracionMesa(RMI rmi1, String nu1, final DatosSesion sesion, String fondo1)
 			throws RemoteException {
 		this.rmi = rmi1;
 		this.nu = nu1;
 		this.sesion = sesion;
+		fondo=fondo1;
 		lj = rmi.getListaJugadores();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,10 +88,16 @@ public class ConfiguracionMesa extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					rmi.iniciarPartida();
-					rmi.llenarMazo(1);
-					rmi.getListaCartasMesa();
-				} catch (RemoteException e1) {					
+					if (lj.size() > 1 && lj.size() < 7) {
+						rmi.iniciarPartida();
+						rmi.llenarMazo(1);
+						rmi.getListaCartasMesa();
+					} else
+						JOptionPane.showInternalMessageDialog(contentPane,
+								"Numero de Juagdores Incorrectos",
+								"Somos muy pocos.... o muchos?",
+								JOptionPane.ERROR_MESSAGE);
+				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
 			}
@@ -122,7 +133,7 @@ public class ConfiguracionMesa extends JFrame {
 		label.setBounds(621, 52, 132, 22);
 		contentPane.add(label);
 
-		buttonActualizarJugadores = new JButton("Actualizar Lista de Jugadores");
+		buttonActualizarJugadores = new JButton("cambiar dinero  ");
 		buttonActualizarJugadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				actualizarJugadores();
@@ -133,7 +144,7 @@ public class ConfiguracionMesa extends JFrame {
 			 */
 
 		});
-		buttonActualizarJugadores.setBounds(46, 334, 377, 55);
+		buttonActualizarJugadores.setBounds(126, 378, 163, 32);
 		contentPane.add(buttonActualizarJugadores);
 
 		comboBox_1 = new JComboBox();
@@ -148,6 +159,18 @@ public class ConfiguracionMesa extends JFrame {
 		label_1.setBounds(621, 157, 132, 22);
 		contentPane.add(label_1);
 		getRootPane().setDefaultButton(buttonActualizarJugadores);
+
+		JLabel lblDineroParaLa = new JLabel("dinero para la mesa");
+		lblDineroParaLa.setForeground(Color.WHITE);
+		lblDineroParaLa.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblDineroParaLa.setBounds(53, 344, 163, 22);
+		contentPane.add(lblDineroParaLa);
+
+		textField = new JTextField();
+		textField.setForeground(Color.WHITE);
+		textField.setBounds(235, 346, 176, 21);
+		contentPane.add(textField);
+		textField.setColumns(10);
 	}
 
 	public void ganador(int ganador) {
@@ -162,42 +185,49 @@ public class ConfiguracionMesa extends JFrame {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		if (lj.size() > 1 && lj.size() < 7) {
-			try {
-				juego = new MesaJuego(rmi, nu, sesion);
-			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 
-			switch (comboBox_1.getSelectedIndex()) {
-			case 0:
-				juego.setEstiloCarta(1);
-				break;
-			case 1:
-				juego.setEstiloCarta(2);
-				break;
-			}
+		try {
+			juego = new MesaJuego(rmi, nu, sesion);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String mesa = "mesas/mesaazul.png";
+		int carta=comboBox_1.getSelectedIndex()+1;
+		switch (comboBox_1.getSelectedIndex()) {
+		case 0:
+			juego.setEstiloCarta(1);
+			break;
+		case 1:
+			juego.setEstiloCarta(2);
+			break;
+		}
 
-			switch (comboBox.getSelectedIndex()) {
-			case 0:
-				juego.setColorMesa("mesas/mesaazul.png");
-				break;
-			case 1:
-				juego.setColorMesa("mesas/mesaroja.png");
-				break;
-			case 2:
-				juego.setColorMesa("mesas/mesaverde.png");
-				break;
-			}
-			juego.setVisible(true);
-			setVisible(false);
-		} else
-			JOptionPane.showInternalMessageDialog(contentPane,
-					"Numero de Juagdores Incorrectos",
-					"Somos muy pocos.... o muchos?", JOptionPane.ERROR_MESSAGE);
+		switch (comboBox.getSelectedIndex()) {
+		case 0:
+			mesa="mesas/mesaazul.png";
+			juego.setColorMesa("mesas/mesaazul.png");
+			break;
+		case 1:
+			mesa="mesas/mesaroja.png";
+			juego.setColorMesa("mesas/mesaroja.png");
+			break;
+		case 2:
+			mesa="mesas/mesaverde.png";
+			juego.setColorMesa("mesas/mesaverde.png");
+			break;
+		}
+		try {
+			rmi.guardarColores(fondo,carta,mesa,nu);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		juego.setVisible(true);
+		setVisible(false);
 
 	}
+
 	public void actualizarJugadores() {
 		try {
 			lj = rmi.getListaJugadores();

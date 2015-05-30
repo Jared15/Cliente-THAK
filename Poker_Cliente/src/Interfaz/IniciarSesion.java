@@ -95,7 +95,7 @@ public class IniciarSesion extends JFrame {
 						Administrador admin= new Administrador(rmi);
 						admin.setVisible(true);
 					}else{
-						sesion= new DatosSesion(rmi,campoUsuario.getText(),client);
+						sesion= new DatosSesion(rmi,campoUsuario.getText(),client,getClase());
 						sesion.setVisible(true);
 						
 					}
@@ -110,6 +110,8 @@ public class IniciarSesion extends JFrame {
 					e.printStackTrace();
 				}
 			}
+
+			
 		});
 		btnIniciarSesion.setFont(new Font("Droid Sans", Font.BOLD, 20));
 		btnIniciarSesion.setForeground(Color.WHITE);
@@ -142,6 +144,10 @@ public class IniciarSesion extends JFrame {
 	public void ganador(int ganador) {
 		sesion.ganador(ganador);
 		
+	}
+	private IniciarSesion getClase() {
+		
+		return this;
 	}
 
 }

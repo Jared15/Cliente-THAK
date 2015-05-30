@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -54,16 +55,24 @@ public class DatosSesion extends JFrame {
 	JLabel label_1;
 	JLabel label_2;
 	String nu;
+	Cliente cliente;
+	IniciarSesion iniciarSesion;
+	String fondo;
 
 	/**
 	 * Create the frame.
-	 * @param client 
+	 * 
+	 * @param client
+	 * @param iniciarSesion 
 	 * 
 	 * @throws RemoteException
 	 */
-	public DatosSesion(RMI rmi1, String nombreUsuario, final Cliente client) throws RemoteException {
+	public DatosSesion(RMI rmi1, String nombreUsuario,  Cliente client, IniciarSesion iniciarSesion1)
+			throws RemoteException {
 		nu = nombreUsuario;
 		rmi = rmi1;
+		cliente=client;
+		iniciarSesion=iniciarSesion1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 614, 440);
 		contentPane = new JPanel();
@@ -87,7 +96,7 @@ public class DatosSesion extends JFrame {
 
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {				
 				lblNewLabel.setIcon(new ImageIcon("guis/gui"
 						+ (String) comboBox.getSelectedItem() + ".png"));
 			}
@@ -100,6 +109,7 @@ public class DatosSesion extends JFrame {
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		btnCrear.setBounds(237, 312, 117, 25);
@@ -108,17 +118,25 @@ public class DatosSesion extends JFrame {
 		JButton btnUnirse = new JButton("Unirse");
 		btnUnirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					rmi.addJugador(nu);
-					DatosSesion este=getEste();
-					cm = new ConfiguracionMesa(rmi, nu,este);
-					cm.setVisible(true);
-					setVisible(false);
-					rmi.actualizarLista();
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
+				
+					try {
+						fondo="guis/gui"+ (String) comboBox.getSelectedItem() + ".png";
+						boolean iniciado=rmi.isIniciada();
+						if(!iniciado){
+							rmi.addJugador(nu);
+							DatosSesion este = getEste();
+							cm = new ConfiguracionMesa(rmi, nu, este,fondo);
+							cm.setVisible(true);
+							setVisible(false);
+							rmi.actualizarLista();
+						}else{
+							JOptionPane.showMessageDialog(null, "El juego ya ha iniciado");
+						}
+					} catch (RemoteException e) {						
+						e.printStackTrace();
+					}				
+
 			}
 		});
 		btnUnirse.setBounds(81, 312, 117, 25);
@@ -127,14 +145,18 @@ public class DatosSesion extends JFrame {
 		JButton button = new JButton("Cerrar Sesion");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
+
 				try {
-					rmi.deleteObserver(client);
+					int b = JOptionPane.showConfirmDialog(null,"Va a cerrar sesion");
+					if (b == 0) {
+						setVisible(false);
+						rmi.deleteObserver(cliente);
+						iniciarSesion.setVisible(true);
+					}
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}				
-				
+				}
+
 			}
 		});
 		button.setBounds(299, 349, 206, 25);
@@ -192,9 +214,11 @@ public class DatosSesion extends JFrame {
 		mostrarAvatarSesion(nombreUsuario);
 		getRootPane().setDefaultButton(btnUnirse);
 	}
-	DatosSesion getEste(){
+
+	DatosSesion getEste() {
 		return this;
 	}
+
 	public MesaJuego getJuego() {
 		return juego;
 	}
