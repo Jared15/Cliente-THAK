@@ -169,8 +169,8 @@ public class MesaJuego extends JFrame {
 
 
 	public MesaJuego(RMI rmi1, String nombreUsuario1, final DatosSesion sesion)throws RemoteException {
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.ico"));
-		this.setTitle("Thak");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Thak");
 
 
 		rmi = rmi1;
