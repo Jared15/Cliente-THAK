@@ -212,38 +212,38 @@ public class MesaJuego extends JFrame {
 		apuesta1 = new JLabel("0");
 		apuesta1.setForeground(SystemColor.text);
 		apuesta1.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta1.setBounds(313, 350, 39, 35);
+		apuesta1.setBounds(313, 350, 39, 70);
 
 		apuestaJugadores.add(apuesta1);
 
 		apuesta2 = new JLabel("0");
 		apuesta2.setForeground(SystemColor.text);
 		apuesta2.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta2.setBounds(370, 460, 46, 35);
+		apuesta2.setBounds(370, 460, 46, 70);
 		apuestaJugadores.add(apuesta2);
 
 		apuesta3 = new JLabel("0");
 		apuesta3.setForeground(SystemColor.text);
 		apuesta3.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta3.setBounds(495, 530, 46, 40);
+		apuesta3.setBounds(495, 530, 46, 70);
 		apuestaJugadores.add(apuesta3);
 
 		apuesta4 = new JLabel("0");
 		apuesta4.setForeground(SystemColor.text);
 		apuesta4.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta4.setBounds(850, 530, 46, 35);
+		apuesta4.setBounds(850, 530, 46, 70);
 		apuestaJugadores.add(apuesta4);
 
 		apuesta5 = new JLabel("0");
 		apuesta5.setForeground(SystemColor.text);
 		apuesta5.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta5.setBounds(996, 460, 46, 25);
+		apuesta5.setBounds(996, 460, 46, 70);
 		apuestaJugadores.add(apuesta5);
 
 		apuesta6 = new JLabel("0");
 		apuesta6.setForeground(SystemColor.text);
 		apuesta6.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta6.setBounds(1053, 350, 46, 25);
+		apuesta6.setBounds(1053, 350, 46, 70);
 		apuestaJugadores.add(apuesta6);
 
 		ficha = new JLabel("");
@@ -253,43 +253,43 @@ public class MesaJuego extends JFrame {
 		List<JLabel> usuarios=new ArrayList<JLabel>();
 
 		JLabel lblUsuario1 = new JLabel("");
-		lblUsuario1.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblUsuario1.setForeground(Color.GRAY);	
-		lblUsuario1.setBounds(70, 400, 152, 14);
+		lblUsuario1.setFont(new Font("Calibri", Font.BOLD, 20));
+		lblUsuario1.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario1.setBounds(70, 415, 152, 14);
 		panel.add(lblUsuario1);			
 		usuarios.add(lblUsuario1);
 		
 		JLabel lblUsuario2 = new JLabel("");
-		lblUsuario2.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblUsuario2.setForeground(Color.GRAY);	
+		lblUsuario2.setFont(new Font("Calibri", Font.BOLD, 20));
+		lblUsuario2.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario2.setBounds(131, 671, 152, 14);
 		panel.add(lblUsuario2);			
 		usuarios.add(lblUsuario2);
 		
 		JLabel lblUsuario3 = new JLabel("");
-		lblUsuario3.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblUsuario3.setForeground(Color.GRAY);	
-		lblUsuario3.setBounds(450, 750, 132, 14);
+		lblUsuario3.setFont(new Font("Calibri", Font.BOLD, 20));
+		lblUsuario3.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario3.setBounds(450, 740, 132, 14);
 		panel.add(lblUsuario3);			
 		usuarios.add(lblUsuario3);
 		
 		JLabel lblUsuario4 = new JLabel("");
-		lblUsuario4.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblUsuario4.setForeground(Color.GRAY);	
-		lblUsuario4.setBounds(905, 750, 192, 14);
+		lblUsuario4.setFont(new Font("Calibri", Font.BOLD, 20));
+		lblUsuario4.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario4.setBounds(905, 740, 192, 14);
 		panel.add(lblUsuario4);			
 		usuarios.add(lblUsuario4);
 		
 		JLabel lblUsuario5 = new JLabel("");
-		lblUsuario5.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblUsuario5.setForeground(Color.GRAY);	
+		lblUsuario5.setFont(new Font("Calibri", Font.BOLD, 20));
+		lblUsuario5.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario5.setBounds(1111, 653, 152, 14);
 		panel.add(lblUsuario5);			
 		usuarios.add(lblUsuario5);
 		
 		JLabel lblUsuario6 = new JLabel("");
-		lblUsuario6.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblUsuario6.setForeground(Color.GRAY);	
+		lblUsuario6.setFont(new Font("Calibri", Font.BOLD, 20));
+		lblUsuario6.setForeground(Color.LIGHT_GRAY);	
 		lblUsuario6.setBounds(1156, 417, 144, 14);
 		panel.add(lblUsuario6);			
 		usuarios.add(lblUsuario6);
@@ -485,7 +485,7 @@ public class MesaJuego extends JFrame {
 
 		lblPozoCant = new JLabel("0");
 		lblPozoCant.setForeground(Color.BLACK);
-		lblPozoCant.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblPozoCant.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPozoCant.setBounds(650, 161, 192, 73);
 		panel.add(lblPozoCant);
 
