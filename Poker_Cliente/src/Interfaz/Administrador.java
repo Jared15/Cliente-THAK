@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
 import java.util.List;
+import javax.swing.JScrollPane;
 
 public class Administrador extends JFrame {
 
@@ -115,9 +116,13 @@ public class Administrador extends JFrame {
 	 * @param rmi Interface con los metodos a utilizar para la conexion con el servidor 
 	 */
 	private void CrearTabla(final RMI rmi) {
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(76, 56, 377, 231);
+		contentPane.add(scrollPane);
 		table = new JTable();
-		table.setBounds(76, 28, 377, 259);
-		contentPane.add(table);
+		scrollPane.setViewportView(table);
+		
 		
 		DefaultTableModel modelo = new DefaultTableModel();
 		
@@ -143,7 +148,7 @@ public class Administrador extends JFrame {
 			
 			modelo.addRow(object);
 		}
-	     table.setModel(modelo);
+		table.setModel(modelo);
 	}
 	
 	/**
