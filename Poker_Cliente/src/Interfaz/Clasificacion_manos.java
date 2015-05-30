@@ -1,6 +1,7 @@
 package Interfaz;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -10,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -22,6 +24,8 @@ public class Clasificacion_manos extends JFrame {
 	 * crea el frame con todo su contenido
 	 */
 	public Clasificacion_manos() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Clasificacion de las manos ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

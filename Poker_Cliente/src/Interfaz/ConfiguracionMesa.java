@@ -3,6 +3,7 @@ package Interfaz;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -71,6 +72,8 @@ public class ConfiguracionMesa extends JFrame {
 	 */
 	public ConfiguracionMesa(RMI rmi1, String nombreUsuario1, final DatosSesion sesion,
 			String fondo1) throws RemoteException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Configuracion de la Mesa");
 		this.rmi = rmi1;
 		this.nombreUsuario = nombreUsuario1;
 		this.sesion = sesion;

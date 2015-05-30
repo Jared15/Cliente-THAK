@@ -2,6 +2,7 @@ package Interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -21,6 +22,8 @@ import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.swing.JScrollPane;
+
 public class Administrador extends JFrame {
 
 	private JPanel contentPane;
@@ -33,6 +36,8 @@ public class Administrador extends JFrame {
 	 * @param rmi Interface con los metodos a utilizar para la conexion con el servidor 
 	 */
 	public Administrador(final RMI rmi) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 542, 384);
 		contentPane = new JPanel();
@@ -115,9 +120,13 @@ public class Administrador extends JFrame {
 	 * @param rmi Interface con los metodos a utilizar para la conexion con el servidor 
 	 */
 	private void CrearTabla(final RMI rmi) {
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(76, 56, 377, 231);
+		contentPane.add(scrollPane);
 		table = new JTable();
-		table.setBounds(76, 28, 377, 259);
-		contentPane.add(table);
+		scrollPane.setViewportView(table);
+		
 		
 		DefaultTableModel modelo = new DefaultTableModel();
 		
@@ -143,7 +152,7 @@ public class Administrador extends JFrame {
 			
 			modelo.addRow(object);
 		}
-	     table.setModel(modelo);
+		table.setModel(modelo);
 	}
 	
 	/**

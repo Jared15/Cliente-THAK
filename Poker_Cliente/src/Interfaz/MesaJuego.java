@@ -5,6 +5,7 @@ import java.awt.DisplayMode;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Label;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -165,8 +166,12 @@ public class MesaJuego extends JFrame {
 	 * @throws RemoteException
 	 *             excepcion de conexion con el servidor
 	 */
-	public MesaJuego(RMI rmi1, String nombreUsuario1, final DatosSesion sesion)
-			throws RemoteException {
+
+
+	public MesaJuego(RMI rmi1, String nombreUsuario1, final DatosSesion sesion)throws RemoteException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Thak");
+
 
 		rmi = rmi1;
 		this.nombreUsuario = nombreUsuario1;
@@ -227,7 +232,7 @@ public class MesaJuego extends JFrame {
 		lblGanador = new JLabel();
 		lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
 		lblGanador.setForeground(Color.WHITE);
-		lblGanador.setBounds(100, 100, 1000, 100);
+		lblGanador.setBounds(350, 100, 1000, 100);
 		contentPane.add(lblGanador);
 		textCantidad = new JTextField();
 		textCantidad.setFont(new Font("Calibri", Font.BOLD, 17));
@@ -255,38 +260,38 @@ public class MesaJuego extends JFrame {
 		apuesta1 = new JLabel("0");
 		apuesta1.setForeground(SystemColor.text);
 		apuesta1.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta1.setBounds(313, 350, 39, 70);
+		apuesta1.setBounds(313, 350, 70, 70);
 
 		apuestaJugadores.add(apuesta1);
 
 		apuesta2 = new JLabel("0");
 		apuesta2.setForeground(SystemColor.text);
 		apuesta2.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta2.setBounds(370, 460, 46, 70);
+		apuesta2.setBounds(370, 460, 70, 70);
 		apuestaJugadores.add(apuesta2);
 
 		apuesta3 = new JLabel("0");
 		apuesta3.setForeground(SystemColor.text);
 		apuesta3.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta3.setBounds(495, 530, 46, 70);
+		apuesta3.setBounds(495, 530, 70, 70);
 		apuestaJugadores.add(apuesta3);
 
 		apuesta4 = new JLabel("0");
 		apuesta4.setForeground(SystemColor.text);
 		apuesta4.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta4.setBounds(850, 530, 46, 70);
+		apuesta4.setBounds(850, 530, 70, 70);
 		apuestaJugadores.add(apuesta4);
 
 		apuesta5 = new JLabel("0");
 		apuesta5.setForeground(SystemColor.text);
 		apuesta5.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta5.setBounds(996, 460, 46, 70);
+		apuesta5.setBounds(996, 460, 70, 70);
 		apuestaJugadores.add(apuesta5);
 
 		apuesta6 = new JLabel("0");
 		apuesta6.setForeground(SystemColor.text);
 		apuesta6.setFont(new Font("Calibri", Font.BOLD, 25));
-		apuesta6.setBounds(1053, 350, 46, 70);
+		apuesta6.setBounds(1053, 350, 70, 70);
 		apuestaJugadores.add(apuesta6);
 
 		ficha = new JLabel("");

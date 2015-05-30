@@ -2,6 +2,7 @@ package Interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -18,6 +19,7 @@ import Conexion.RMI;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
+
 import javax.swing.UIManager;
 
 public class ConfiguracionCuenta extends JFrame {
@@ -37,6 +39,9 @@ public class ConfiguracionCuenta extends JFrame {
 	 * @param nombreUsuario usuario al que se le muestra la configuracion de la cuenta
 	 */
 	public ConfiguracionCuenta(RMI rmi1,String nombreUsuario) {
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Configuracion de la cuenta");
 		nu=nombreUsuario;
 		this.rmi=rmi1;
 		String pass=null;
