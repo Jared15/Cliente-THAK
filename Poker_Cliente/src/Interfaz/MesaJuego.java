@@ -1040,7 +1040,10 @@ public class MesaJuego extends JFrame {
 	public void ganador(int ganador) {
 		final int ganador1=ganador;
 		lblGanador.setText("GANADOR JUGADOR" + ganador1);
-		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
@@ -1048,7 +1051,8 @@ public class MesaJuego extends JFrame {
 					e.printStackTrace();
 				}
 				lblGanador.setText("");
-	
+			}
+		}).start();
 		int dinero = Integer.parseInt(dineroJugadores.get(ganador - 1)
 				.getText().trim());
 		dinero += Integer.parseInt(lblPozoCant.getText().trim());
