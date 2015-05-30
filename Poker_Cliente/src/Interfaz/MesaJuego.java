@@ -174,7 +174,11 @@ public class MesaJuego extends JFrame {
 	       pc.setFullScreen(dm, this);
 		
 		
-		
+	       lblGanador = new JLabel();
+			lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
+			lblGanador.setForeground(Color.WHITE);	
+			lblGanador.setBounds(100, 100, 1000, 100);
+			panel.add(lblGanador);
 
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
@@ -522,11 +526,7 @@ public class MesaJuego extends JFrame {
 		for (int j = 0; j < listaJugadores.size(); j++) {
 			dineroJugadores.get(j).setText(listaJugadores.get(j).get(1));
 		}
-		lblGanador = new JLabel();
-		lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
-		lblGanador.setForeground(Color.WHITE);	
-		lblGanador.setBounds(100, 100, 1000, 100);
-		panel.add(lblGanador);
+		
 
 	}
 
@@ -1045,12 +1045,12 @@ public class MesaJuego extends JFrame {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("Thread!");
+				lblGanador.setText("");
 			}
 		}).start();
 		int dinero = Integer.parseInt(dineroJugadores.get(ganador - 1)
