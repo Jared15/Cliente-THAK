@@ -232,7 +232,7 @@ public class MesaJuego extends JFrame {
 		lblGanador = new JLabel();
 		lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
 		lblGanador.setForeground(Color.WHITE);
-		lblGanador.setBounds(100, 100, 1000, 100);
+		lblGanador.setBounds(350, 100, 1000, 100);
 		contentPane.add(lblGanador);
 		textCantidad = new JTextField();
 		textCantidad.setFont(new Font("Calibri", Font.BOLD, 17));
