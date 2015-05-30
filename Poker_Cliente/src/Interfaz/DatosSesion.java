@@ -2,6 +2,7 @@ package Interfaz;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -90,6 +91,9 @@ public class DatosSesion extends JFrame {
 	 */
 	public DatosSesion(RMI rmi1, String nombreUsuario, Cliente client,
 			IniciarSesion iniciarSesion1) throws RemoteException {
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Thak");
 		nu = nombreUsuario;
 		rmi = rmi1;
 		cliente = client;

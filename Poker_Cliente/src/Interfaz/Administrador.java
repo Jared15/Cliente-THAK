@@ -2,6 +2,7 @@ package Interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -20,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
 import java.util.List;
+
 import javax.swing.JScrollPane;
 
 public class Administrador extends JFrame {
@@ -34,6 +36,8 @@ public class Administrador extends JFrame {
 	 * @param rmi Interface con los metodos a utilizar para la conexion con el servidor 
 	 */
 	public Administrador(final RMI rmi) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+		setTitle("Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 542, 384);
 		contentPane = new JPanel();
