@@ -30,12 +30,8 @@ public class CrearJugador extends JFrame {
 	JComboBox comboBox;
 	RMI rmi;
 	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the frame.
+	 * crea la interfaz para crear un jugador
+	 * @param rmi1 interface con los metodos para la conexion con el servidor
 	 */
 	public CrearJugador(RMI rmi1) {
 		this.rmi=rmi1;
@@ -66,6 +62,10 @@ public class CrearJugador extends JFrame {
 		
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
+			/**
+			 * boton para crear un usuario con los campos llenados en la interfaz
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(!rmi.verificarJugador(crearTF_Nombre.getText(), textField.getText())){
@@ -110,6 +110,9 @@ public class CrearJugador extends JFrame {
 		
 		JButton button = new JButton("Salir");
 		button.addActionListener(new ActionListener() {
+			/**
+			 * boton para ocultar la interfaz CrearJugador
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				
 				setVisible(false);

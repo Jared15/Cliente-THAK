@@ -40,27 +40,41 @@ public class ConfiguracionMesa extends JFrame {
 	List<List<String>> lj;
 	DefaultTableModel modelo;
 	Object[] object;
-	String nu;
+	String nombreUsuario;
 	private JComboBox comboBox_1;
 	private JLabel label_1;
 	private DatosSesion sesion;
 	private JTextField textField;
 	private String fondo;
 
+	/**
+	 * 
+	 * @return el juego en la variable juego
+	 */
 	public MesaJuego getJuego() {
 		return juego;
 	}
-
+	/**
+	 * establece el juego que llega como parametro como al juego de la clase
+	 * @param juego
+	 */
 	public void setJuego(MesaJuego juego) {
 		this.juego = juego;
 	}
-
-	public ConfiguracionMesa(RMI rmi1, String nu1, final DatosSesion sesion, String fondo1)
-			throws RemoteException {
+	/**
+	 *  contructor de la clase ConfiguracionMesa
+	 * @param rmi1 interfaz con los metodos para la conexion con el servidor
+	 * @param nombreUsuario1 nombre del usuario
+	 * @param sesion referencia a la interfaz grafica sesion
+	 * @param fondo1 eleccion de fondo del jugador
+	 * @throws RemoteException
+	 */
+	public ConfiguracionMesa(RMI rmi1, String nombreUsuario1, final DatosSesion sesion,
+			String fondo1) throws RemoteException {
 		this.rmi = rmi1;
-		this.nu = nu1;
+		this.nombreUsuario = nombreUsuario1;
 		this.sesion = sesion;
-		fondo=fondo1;
+		fondo = fondo1;
 		lj = rmi.getListaJugadores();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,6 +100,9 @@ public class ConfiguracionMesa extends JFrame {
 
 		JButton btnNewButton = new JButton("Iniciar Partida");
 		btnNewButton.addActionListener(new ActionListener() {
+			/**
+			 * boton enviar la solicitud de iniciar la partida al servidor
+			 */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (lj.size() > 1 && lj.size() < 7) {
@@ -172,12 +189,17 @@ public class ConfiguracionMesa extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 	}
-
+	/**
+	 * 
+	 * @param ganador identificador del jugador que gano la mano completa
+	 */
 	public void ganador(int ganador) {
 		juego.ganador(ganador);
 
 	}
-
+	/**
+	 * inicia la partida con las elecciones del usuario
+	 */
 	public void iniciarPartida() {
 		try {
 			lj = rmi.getListaJugadores();
@@ -187,13 +209,13 @@ public class ConfiguracionMesa extends JFrame {
 		}
 
 		try {
-			juego = new MesaJuego(rmi, nu, sesion);
+			juego = new MesaJuego(rmi, nombreUsuario, sesion);
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		String mesa = "mesas/mesaazul.png";
-		int carta=comboBox_1.getSelectedIndex()+1;
+		int carta = comboBox_1.getSelectedIndex() + 1;
 		switch (comboBox_1.getSelectedIndex()) {
 		case 0:
 			juego.setEstiloCarta(1);
@@ -205,20 +227,20 @@ public class ConfiguracionMesa extends JFrame {
 
 		switch (comboBox.getSelectedIndex()) {
 		case 0:
-			mesa="mesas/mesaazul.png";
+			mesa = "mesas/mesaazul.png";
 			juego.setColorMesa("mesas/mesaazul.png");
 			break;
 		case 1:
-			mesa="mesas/mesaroja.png";
+			mesa = "mesas/mesaroja.png";
 			juego.setColorMesa("mesas/mesaroja.png");
 			break;
 		case 2:
-			mesa="mesas/mesaverde.png";
+			mesa = "mesas/mesaverde.png";
 			juego.setColorMesa("mesas/mesaverde.png");
 			break;
 		}
 		try {
-			rmi.guardarColores(fondo,carta,mesa,nu);
+			rmi.guardarColores(fondo, carta, mesa, nombreUsuario);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -227,7 +249,9 @@ public class ConfiguracionMesa extends JFrame {
 		setVisible(false);
 
 	}
-
+	/**
+	 * actualiza la tabla con los jugadores presentes en la mesa
+	 */
 	public void actualizarJugadores() {
 		try {
 			lj = rmi.getListaJugadores();

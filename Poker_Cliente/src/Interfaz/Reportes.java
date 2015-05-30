@@ -21,11 +21,11 @@ public class Reportes extends JFrame {
 	private JPanel contentPane;
 	JTable table;
 	Administrador administrador;
-	/**
-	 * Create the frame.
-	 * @param rmi 
-	 * @param administrador 
-	 */
+/**
+ * crea la Interfaz Reportes con sus componentes
+ * @param rmi interface con los metodos de conexion con el servidor
+ * @param administrador1 instancia de la interfaz Administrador asociada
+ */
 	public Reportes(RMI rmi, Administrador administrador1) {
 		administrador=administrador1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,8 +39,9 @@ public class Reportes extends JFrame {
 		CrearTabla(rmi);
 	}
 	/**
-	 * @param rmi
-	 */
+	 * Crea la tabla con su respectivo modelo
+	 * @param rmi interface con los metodos de conexion al servidor
+	 */ 
 	private void CrearTabla(final RMI rmi) {
 		table = new JTable();
 		table.setBounds(76, 28, 377, 259);
@@ -74,6 +75,9 @@ public class Reportes extends JFrame {
 	     
 	     JButton btnCerrar = new JButton("cerrar");
 	     btnCerrar.addActionListener(new ActionListener() {
+	    	 /**
+	    	  * ocuelta la interfaz Reportes
+	    	  */
 	     	public void actionPerformed(ActionEvent arg0) {
 	     		setVisible(false);
 	     		administrador.setVisible(true);

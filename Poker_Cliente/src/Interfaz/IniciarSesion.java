@@ -34,12 +34,19 @@ public class IniciarSesion extends JFrame {
 	private JLabel label;
 	private JLabel fondo;
 	private DatosSesion sesion;
+	/**
+	 * 
+	 * @return instancia de DatosSesion de IniciarSesion
+	 */
 	public DatosSesion getSesion() {
 		return sesion;
 	}
 
 
-
+/**
+ * Establece la sesion para IniciarSesion
+ * @param sesion sesion a establecer
+ */
 	public void setSesion(DatosSesion sesion) {
 		this.sesion = sesion;
 	}
@@ -53,7 +60,11 @@ public class IniciarSesion extends JFrame {
 	CrearJugador crear;
 	
 	
-	
+	/**
+	 * Crea la instancia de la interfaz con todos sus componentes
+	 * @param rmi1 interface con los metodos de la conexion al servidor
+	 * @param client Intancia de Cliente asociado a IniciarSesion
+	 */
 	public IniciarSesion(RMI rmi1, final Cliente client)  {
 		rmi=rmi1;
 		setResizable(false);
@@ -88,6 +99,9 @@ public class IniciarSesion extends JFrame {
 		
 		JButton btnIniciarSesion = new JButton("Iniciar Sesion");
 		btnIniciarSesion.addActionListener(new ActionListener() {
+			/**
+			 * envia peticion de verificacion de usuarion al servidor
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				if(rmi.verificarJugador(campoUsuario.getText(), campoContrasena.getText())){
@@ -121,6 +135,9 @@ public class IniciarSesion extends JFrame {
 		
 		btnCrearUsuario = new JButton("Crear Usuario");
 		btnCrearUsuario.addActionListener(new ActionListener() {
+			/**
+			 * abre la interfaz para crear un usuario
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				crear= new CrearJugador(rmi);
 				crear.setVisible(true);
@@ -140,11 +157,18 @@ public class IniciarSesion extends JFrame {
 	}
 
 
-
+/**
+ * envia la notificacion de ganador a sesion
+ * @param ganador id del jugador ganador
+ */
 	public void ganador(int ganador) {
 		sesion.ganador(ganador);
 		
 	}
+	/**
+	 * 
+	 * @return instancia de IniciarSesion actual
+	 */
 	private IniciarSesion getClase() {
 		
 		return this;

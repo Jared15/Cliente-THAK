@@ -28,11 +28,12 @@ public class Denuncio extends JFrame {
 	String jugador;
 	Jugadores jugadores;
 
-	/**
-	 * Create the frame.
-	 * @param jugadores 
-	 * @param rmi1 
-	 */
+/**
+ * Crea la interfaz Denuncio con todos sus componentes
+ * @param rmi1 interface con los metodos para la conxion con el servidor
+ * @param jugadores1 Interfaz Jugador asociada a la interfaz Denuncio actual
+ * @param jugador1 jugador a ser denunciado por el jugador que inicia sesion
+ */
 	public Denuncio(RMI rmi1, Jugadores jugadores1,String jugador1 ){
 		jugadores=jugadores1;
 		rmi=rmi1;
@@ -69,6 +70,9 @@ public class Denuncio extends JFrame {
 		
 		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
+			/**
+			 * envia peticion de denuncio al servidor con los datos ingresados por el usuario
+			 */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					rmi.registrarDenuncio(jugador,textField.getText(),textArea.getText());
@@ -83,6 +87,9 @@ public class Denuncio extends JFrame {
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
+			/**
+			 * termina la ejecucion de la Interfaz Denuncio actual
+			 */
 			public void actionPerformed(ActionEvent e) {
 				jugadores.setVisible(true);
 				try {

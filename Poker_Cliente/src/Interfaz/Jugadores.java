@@ -26,9 +26,11 @@ public class Jugadores extends JFrame {
 	MesaJuego mesa;
 	private JTable table;
 	RMI rmi;
+
 	/**
-	 * Create the frame.
-	 * @param rmi 
+	 * Crea la interfaz Jugador con sos componentes
+	 * @param rmi1 interface con los metodos de la conexion con el servidor
+	 * @param mesa instancia de la MesaJuego asociada
 	 */
 	public Jugadores(RMI rmi1,MesaJuego mesa) {
 		this.rmi=rmi1;
@@ -70,6 +72,9 @@ public class Jugadores extends JFrame {
 		
 		JButton btnVerDetalle = new JButton("ver detalle");
 		btnVerDetalle.addActionListener(new ActionListener() {
+			/**
+			 * abre la Interfaz para ver los detalles de un jugador
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre=(String) table.getValueAt(table.getSelectedRow(), 0);
 				try {
@@ -89,6 +94,9 @@ public class Jugadores extends JFrame {
 		
 		JButton btnDenunciar = new JButton("denunciar");
 		btnDenunciar.addActionListener(new ActionListener() {
+			/**
+			 * abre la Interfaz para denunciar a un jugador
+			 */
 			public void actionPerformed(ActionEvent e) {
 				String nombre=(String) table.getValueAt(table.getSelectedRow(), 0);
 				Denuncio denuncio=new Denuncio(rmi, getClase(),nombre);
@@ -100,6 +108,10 @@ public class Jugadores extends JFrame {
 		contentPane.add(btnDenunciar);
 		
 	}
+	/**
+	 * devuelve la instancia de Jugador actual
+	 * @return instancia de Jugadores actual
+	 */
 	public Jugadores getClase() {
 		return this;
 	}

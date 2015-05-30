@@ -32,7 +32,9 @@ public class ConfiguracionCuenta extends JFrame {
 	private JButton button_2;
 
 	/**
-	 * Crea la configuracion cuenta con todos sus componentes
+	 * Crea la configuracion cuenta con todos sus componentes graficos
+	 * @param rmi1 interface RMI con los metodos para hacer la conexion al servidor
+	 * @param nombreUsuario usuario al que se le muestra la configuracion de la cuenta
 	 */
 	public ConfiguracionCuenta(RMI rmi1,String nombreUsuario) {
 		nu=nombreUsuario;
@@ -72,6 +74,9 @@ public class ConfiguracionCuenta extends JFrame {
 		
 		JButton btnNewButton = new JButton("Actualizar");
 		btnNewButton.addActionListener(new ActionListener() {
+			/**
+			 * boton para enviar la solicitud de  actualización de la informacion consignada en los campos al servidor
+			 */
 			public void actionPerformed(ActionEvent e) {
 				try {
 				switch(comboBox.getSelectedIndex()){
@@ -115,6 +120,9 @@ public class ConfiguracionCuenta extends JFrame {
 		
 		button = new JButton("Cerrar");
 		button.addActionListener(new ActionListener() {
+			/**
+			 * oculta la ventana de configuracion cuenta
+			 */
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}
@@ -124,6 +132,9 @@ public class ConfiguracionCuenta extends JFrame {
 		
 		button_1 = new JButton("Eliminar Cuenta");
 		button_1.addActionListener(new ActionListener() {
+			/**
+			 * envia la solicitud al servidor para eliminar el jugador nen la variable nu
+			 */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					rmi.eliminarJugador(nu);

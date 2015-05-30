@@ -32,13 +32,13 @@ public class Detalles extends JFrame {
 	JLabel label_2;
 	String nu;
 
-	/**
-	 * Create the frame.
-	 * @param jugadores 
-	 * @param client 
-	 * 
-	 * @throws RemoteException
-	 */
+/**
+ * crea la interfaz Detalles con todos sus componentes
+ * @param rmi1 interface con los metodos para la conexion con el servidor
+ * @param nombreUsuario nombre del usuario que inicio sesion
+ * @param jugadores instancia de la Interfaz Jugadores asciada
+ * @throws RemoteException exepcion de conexion con el servidor
+ */
 	public Detalles(RMI rmi1, String nombreUsuario, Jugadores jugadores) throws RemoteException {
 		nu = nombreUsuario;
 		rmi = rmi1;
@@ -91,18 +91,19 @@ public class Detalles extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon("guis/guiAzul.png"));
 		mostrarAvatarSesion(nombreUsuario);
 	}
+	/**
+	 * 
+	 * @return la instancia de Detalles
+	 */
 	Detalles getEste(){
 		return this;
 	}
 
-
-	/**
-	 * muestra el avatar o imagen del jugador que inicio sesion
-	 * 
-	 * @param nombreUsuario
-	 *            ( el nombre del usuario que inicio sesion
-	 * @throws RemoteException
-	 */
+/**
+ * muestra el avatar o imagen del jugador que inicio sesion
+ * @param nombreUsuario usuario que inicia sesion
+ * @throws RemoteException exepcion de conexion con el servidor
+ */
 	public void mostrarAvatarSesion(String nombreUsuario)
 			throws RemoteException {
 		List<String> j = rmi.traerAvatar(nombreUsuario);

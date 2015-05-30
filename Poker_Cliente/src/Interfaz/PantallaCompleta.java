@@ -9,7 +9,11 @@ public class PantallaCompleta{
       GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
    gd = env.getDefaultScreenDevice();
  }
-  
+  /**
+   * establece la la ventana en pantalla completa
+   * @param dm modo de despliegue 
+   * @param ventana ventana a poner en pantalla completa
+   */
  public void setFullScreen(DisplayMode dm, JFrame ventana){
     ventana.setUndecorated(true);
     ventana.setResizable(false);
@@ -22,12 +26,17 @@ public class PantallaCompleta{
     }catch(IllegalArgumentException e){}
   }
  }
-  
+ /**
+  * obtiene la ventana en pantalla completa
+  * @return la ventana en pantala completa
+  */
  public Window getFullScreenWindow(){
     return gd.getFullScreenWindow();
  }
   
- //restauramos los valores previos
+ /**
+  * muestra la ventana en pantalla completa
+  */
  public void restoreScreen(){
     Window w = gd.getFullScreenWindow();
     if(w != null){

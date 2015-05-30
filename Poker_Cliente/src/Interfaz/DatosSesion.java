@@ -36,18 +36,36 @@ public class DatosSesion extends JFrame {
 	JComboBox comboBox;
 	ConfiguracionMesa Cm;
 
+	/**
+	 * 
+	 * @return Configuracion de la mesa
+	 */
 	public ConfiguracionMesa getCm() {
 		return cm;
 	}
 
+	/**
+	 * Establece la configuracion de la mesa cm, a la interface DatosSesion
+	 * 
+	 * @param cm
+	 */
 	public void setCm(ConfiguracionMesa cm) {
 		this.cm = cm;
 	}
 
+	/**
+	 * 
+	 * @return configuracion cuenta de la interface DatosSesion
+	 */
 	public ConfiguracionCuenta getCc() {
 		return cc;
 	}
 
+	/**
+	 * Establece la configuracion cuenta a DatosSesion
+	 * 
+	 * @param cc
+	 */
 	public void setCc(ConfiguracionCuenta cc) {
 		this.cc = cc;
 	}
@@ -63,19 +81,19 @@ public class DatosSesion extends JFrame {
 	String fondo;
 
 	/**
-	 * Create the frame.
-	 * 
-	 * @param client
-	 * @param iniciarSesion 
-	 * 
-	 * @throws RemoteException
+	 * Constructor de DatosSesion
+	 * @param rmi1 interfaz con los metodos para la conexion con el servidor
+	 * @param nombreUsuario nombre del usuario que esta ejecutando la interfaz
+	 * @param client instancia de cliente asociada a la instancia que se va a crear de DatosCliente
+	 * @param iniciarSesion1 instancia de IniciarSesion asociada a la instancia que se va a crear de DatosCliente
+	 * @throws RemoteException exepcion de la conexion con el servidor
 	 */
-	public DatosSesion(RMI rmi1, String nombreUsuario,  Cliente client, IniciarSesion iniciarSesion1)
-			throws RemoteException {
+	public DatosSesion(RMI rmi1, String nombreUsuario, Cliente client,
+			IniciarSesion iniciarSesion1) throws RemoteException {
 		nu = nombreUsuario;
 		rmi = rmi1;
-		cliente=client;
-		iniciarSesion=iniciarSesion1;
+		cliente = client;
+		iniciarSesion = iniciarSesion1;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 614, 440);
 		contentPane = new JPanel();
@@ -85,6 +103,9 @@ public class DatosSesion extends JFrame {
 
 		JButton btnConfiguraciones = new JButton("Configuraciones");
 		btnConfiguraciones.addActionListener(new ActionListener() {
+			/**
+			 * Boton que abre la interfaz configuracionCuenta
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				cc = new ConfiguracionCuenta(rmi, nu);
 				cc.setVisible(true);
@@ -93,6 +114,9 @@ public class DatosSesion extends JFrame {
 
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
+			/**
+			 * Actualiza el fondo de la interfaz con el color seleccionado por el usuario
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				lblNewLabel.setIcon(new ImageIcon("guis/gui"
 						+ (String) comboBox.getSelectedItem() + ".png"));
@@ -107,10 +131,13 @@ public class DatosSesion extends JFrame {
 
 		JButton btnCrear = new JButton("Manual");
 		btnCrear.addActionListener(new ActionListener() {
+			/**
+			 * abre el manual de usuario con el lector de pdf
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Runtime.getRuntime().exec("cmd /c start manual.pdf" );
-				} catch (IOException e) {				
+					Runtime.getRuntime().exec("cmd /c start manual.pdf");
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
@@ -120,25 +147,29 @@ public class DatosSesion extends JFrame {
 
 		JButton btnUnirse = new JButton("Jugar");
 		btnUnirse.addActionListener(new ActionListener() {
+			/**
+			 * abre la interfaz para configurar la mesa de juego
+			 */
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
-					try {
-						fondo="guis/gui"+ (String) comboBox.getSelectedItem() + ".png";
-						boolean iniciado=rmi.isIniciada();
-						if(!iniciado){
-							rmi.addJugador(nu);
-							DatosSesion este = getEste();
-							cm = new ConfiguracionMesa(rmi, nu, este,fondo);
-							cm.setVisible(true);
-							setVisible(false);
-							rmi.actualizarLista();
-						}else{
-							JOptionPane.showMessageDialog(null, "El juego ya ha iniciado");
-						}
-					} catch (RemoteException e) {						
-						e.printStackTrace();
-					}				
+
+				try {
+					fondo = "guis/gui" + (String) comboBox.getSelectedItem()
+							+ ".png";
+					boolean iniciado = rmi.isIniciada();
+					if (!iniciado) {
+						rmi.addJugador(nu);
+						DatosSesion este = getEste();
+						cm = new ConfiguracionMesa(rmi, nu, este, fondo);
+						cm.setVisible(true);
+						setVisible(false);
+						rmi.actualizarLista();
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"El juego ya ha iniciado");
+					}
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -147,10 +178,14 @@ public class DatosSesion extends JFrame {
 
 		JButton button = new JButton("Cerrar Sesion");
 		button.addActionListener(new ActionListener() {
+			/**
+			 * vuelve a la pantalla de IniciarSesion
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-					int b = JOptionPane.showConfirmDialog(null,"Va a cerrar sesion");
+					int b = JOptionPane.showConfirmDialog(null,
+							"Va a cerrar sesion");
 					if (b == 0) {
 						setVisible(false);
 						rmi.deleteObserver(cliente);
@@ -167,6 +202,9 @@ public class DatosSesion extends JFrame {
 
 		JButton btnManos = new JButton("Manos");
 		btnManos.addActionListener(new ActionListener() {
+			/**
+			 * muestra la clasificacion de manos
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				Clasificacion_manos clasificacionmanos = new Clasificacion_manos();
 				clasificacionmanos.setVisible(true);
@@ -209,13 +247,16 @@ public class DatosSesion extends JFrame {
 		label_3.setFont(new Font("Arial Black", Font.BOLD, 20));
 		label_3.setBounds(260, 230, 216, 29);
 		contentPane.add(label_3);
-		
+
 		JButton btnTomarNotas = new JButton("Tomar Notas");
 		btnTomarNotas.addActionListener(new ActionListener() {
+			/**
+			 * provee un espacio para agregar una nota y hace la peticion al servidor para agregar la nota
+			 */
 			public void actionPerformed(ActionEvent e) {
-				String nota=JOptionPane.showInputDialog("esciba aqui", null);
+				String nota = JOptionPane.showInputDialog("esciba aqui", null);
 				try {
-					rmi.agregarNota(nota,nu);
+					rmi.agregarNota(nota, nu);
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -232,26 +273,33 @@ public class DatosSesion extends JFrame {
 		mostrarAvatarSesion(nombreUsuario);
 		getRootPane().setDefaultButton(btnUnirse);
 	}
-
+	/**
+	 * 
+	 * @return la instancia de la interfaz DatosSesion actual
+	 */
 	DatosSesion getEste() {
 		return this;
 	}
-
+	/**
+	 * 
+	 * @return Juego asociado a DatosSesion actual
+	 */
 	public MesaJuego getJuego() {
 		return juego;
 	}
-
+	/**
+	 * 
+	 * @param juego establece la mesa de juego a la interfaz DatosSesion actual
+	 */
 	public void setJuego(MesaJuego juego) {
 		this.juego = juego;
 	}
 
-	/**
-	 * muestra el avatar o imagen del jugador que inicio sesion
-	 * 
-	 * @param nombreUsuario
-	 *            ( el nombre del usuario que inicio sesion
-	 * @throws RemoteException
-	 */
+/**
+ * muestra el avatar o imagen del jugador que inicio sesion
+ * @param nombreUsuario nombre del usuario que inicio sesion
+ * @throws RemoteException exepcion de conexion con el servidor
+ */
 	public void mostrarAvatarSesion(String nombreUsuario)
 			throws RemoteException {
 		List<String> j = rmi.traerAvatar(nombreUsuario);
@@ -260,7 +308,10 @@ public class DatosSesion extends JFrame {
 		label_2.setText(j.get(2));
 		label.setIcon(new ImageIcon(j.get(3)));
 	}
-
+	/**
+	 * notifica un ganador a la Interfaz configuracion mesa
+	 * @param ganador identificador del jugador que gano la ronda
+	 */
 	public void ganador(int ganador) {
 		cm.ganador(ganador);
 

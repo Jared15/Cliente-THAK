@@ -70,10 +70,21 @@ public class MesaJuego extends JFrame {
 	private List<JLabel> dineroJugadores = new ArrayList<JLabel>();
 	private List<JLabel> apuestaJugadores = new ArrayList<JLabel>();
 
+	/**
+	 * obtiene el estilo de carta de la mesa
+	 * 
+	 * @return el estilo de carta
+	 */
 	public int getEstiloCarta() {
 		return estiloCarta;
 	}
 
+	/**
+	 * establece el estilo de carta a la mesa de juego
+	 * 
+	 * @param estiloCarta
+	 *            estilo a establecer
+	 */
 	public void setEstiloCarta(int estiloCarta) {
 		this.estiloCarta = estiloCarta;
 	}
@@ -81,12 +92,22 @@ public class MesaJuego extends JFrame {
 	RMI rmi;
 	List<String> mesa = new ArrayList<String>();
 	List<List<String>> listaJugadores;
-	String nu;
+	String nombreUsuario;
 
+	/**
+	 * Obtiene la mesa asociada a mesa de juego
+	 * 
+	 * @return mesa asociada
+	 */
 	public List<String> getMesa() {
 		return mesa;
 	}
 
+	/**
+	 * establece la mesa a la mesaJuego actual
+	 * 
+	 * @param mesa
+	 */
 	public void setMesa(List<String> mesa) {
 		this.mesa = mesa;
 	}
@@ -133,24 +154,28 @@ public class MesaJuego extends JFrame {
 	private JButton btnVerJugadores;
 
 	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the frame.
-	 * @param sesion 
+	 * Crea una instancia de Mesa juego con todos sus componentes
 	 * 
+	 * @param rmi1
+	 *            interface con los metodos de la conexion con el servidor
+	 * @param nombreUsuario1
+	 *            nombre de usuario que inicio sesion
+	 * @param sesion
+	 *            sesion asociada a la MesaJuego actual
 	 * @throws RemoteException
+	 *             excepcion de conexion con el servidor
 	 */
-	public MesaJuego(RMI rmi1, String nu1, final DatosSesion sesion) throws RemoteException {
+	public MesaJuego(RMI rmi1, String nombreUsuario1, final DatosSesion sesion)
+			throws RemoteException {
 
 		rmi = rmi1;
-		this.nu = nu1;
+		this.nombreUsuario = nombreUsuario1;
 
 		rmi.llenarMazo(1);
 		listaJugadores = rmi.getListaJugadores();
 
 		for (int j = 0; j < listaJugadores.size(); j++) {
-			if (listaJugadores.get(j).get(0).equalsIgnoreCase(nu)) {
+			if (listaJugadores.get(j).get(0).equalsIgnoreCase(nombreUsuario)) {
 				idJugador = j + 1;
 			}
 		}
@@ -161,45 +186,49 @@ public class MesaJuego extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-
 		contentPane.setBackground(Color.decode("#3b0707"));
-		
-		DisplayMode dm = new DisplayMode(1336,768,32,DisplayMode.REFRESH_RATE_UNKNOWN);
+
+		DisplayMode dm = new DisplayMode(1336, 768, 32,
+				DisplayMode.REFRESH_RATE_UNKNOWN);
 		PantallaCompleta pc = new PantallaCompleta();
 
-	       pc.setFullScreen(dm, this);
-	       contentPane.setLayout(null);
-	       
-	       btnVerJugadores = new JButton("ver jugadores");
-	       btnVerJugadores.addActionListener(new ActionListener() {
-	       	public void actionPerformed(ActionEvent arg0) {
-	       		Jugadores jugadores= new Jugadores(rmi,getClase());
-	       		jugadores.setVisible(true);
-	       	}
-	       	
-	       });
-	       btnVerJugadores.setBounds(23, 60, 121, 23);
-	       contentPane.add(btnVerJugadores);
-	       
-	       		JButton btnSalir = new JButton("Salir");
-	       		btnSalir.addActionListener(new ActionListener() {
-	       			public void actionPerformed(ActionEvent arg0) {
-	       				setVisible(false);
-	       				sesion.setVisible(true);
-	       				
+		pc.setFullScreen(dm, this);
+		contentPane.setLayout(null);
 
-	       			}
-	       		});
-	       		
-	       				btnSalir.setBounds(23, 24, 121, 25);
-	       				contentPane.add(btnSalir);
-		
-		
-	       lblGanador = new JLabel();
-			lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
-			lblGanador.setForeground(Color.WHITE);	
-			lblGanador.setBounds(100, 100, 1000, 100);
-			contentPane.add(lblGanador);
+		btnVerJugadores = new JButton("ver jugadores");
+		btnVerJugadores.addActionListener(new ActionListener() {
+			/**
+			 * abre la interfaz Jugadores
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				Jugadores jugadores = new Jugadores(rmi, getClase());
+				jugadores.setVisible(true);
+			}
+
+		});
+		btnVerJugadores.setBounds(23, 60, 121, 23);
+		contentPane.add(btnVerJugadores);
+
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			/**
+			 * oculta la interfaz MesaJuego
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				sesion.setVisible(true);
+
+			}
+		});
+
+		btnSalir.setBounds(23, 24, 121, 25);
+		contentPane.add(btnSalir);
+
+		lblGanador = new JLabel();
+		lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
+		lblGanador.setForeground(Color.WHITE);
+		lblGanador.setBounds(100, 100, 1000, 100);
+		contentPane.add(lblGanador);
 		textCantidad = new JTextField();
 		textCantidad.setFont(new Font("Calibri", Font.BOLD, 17));
 		textCantidad.setForeground(SystemColor.text);
@@ -211,6 +240,9 @@ public class MesaJuego extends JFrame {
 		slider = new JSlider();
 		slider.setBackground(SystemColor.desktop);
 		slider.addChangeListener(new ChangeListener() {
+			/**
+			 * actualiza en numero en la apuesto con el cambio en el deslisador
+			 */
 			public void stateChanged(ChangeEvent arg0) {
 				textCantidad.setText(slider.getValue() + "");
 			}
@@ -262,61 +294,58 @@ public class MesaJuego extends JFrame {
 		ficha.setIcon(new ImageIcon("avatares/halo.png"));
 		contentPane.add(ficha);
 		setFichaJugador();
-		List<JLabel> usuarios=new ArrayList<JLabel>();
+		List<JLabel> usuarios = new ArrayList<JLabel>();
 
 		JLabel lblUsuario1 = new JLabel("");
 		lblUsuario1.setFont(new Font("Calibri", Font.BOLD, 20));
-		lblUsuario1.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario1.setForeground(Color.LIGHT_GRAY);
 		lblUsuario1.setBounds(70, 415, 152, 14);
-		contentPane.add(lblUsuario1);			
+		contentPane.add(lblUsuario1);
 		usuarios.add(lblUsuario1);
-		
+
 		JLabel lblUsuario2 = new JLabel("");
 		lblUsuario2.setFont(new Font("Calibri", Font.BOLD, 20));
-		lblUsuario2.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario2.setForeground(Color.LIGHT_GRAY);
 		lblUsuario2.setBounds(131, 671, 152, 14);
-		contentPane.add(lblUsuario2);			
+		contentPane.add(lblUsuario2);
 		usuarios.add(lblUsuario2);
-		
+
 		JLabel lblUsuario3 = new JLabel("");
 		lblUsuario3.setFont(new Font("Calibri", Font.BOLD, 20));
-		lblUsuario3.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario3.setForeground(Color.LIGHT_GRAY);
 		lblUsuario3.setBounds(450, 740, 132, 14);
-		contentPane.add(lblUsuario3);			
+		contentPane.add(lblUsuario3);
 		usuarios.add(lblUsuario3);
-		
+
 		JLabel lblUsuario4 = new JLabel("");
 		lblUsuario4.setFont(new Font("Calibri", Font.BOLD, 20));
-		lblUsuario4.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario4.setForeground(Color.LIGHT_GRAY);
 		lblUsuario4.setBounds(905, 740, 192, 14);
-		contentPane.add(lblUsuario4);			
+		contentPane.add(lblUsuario4);
 		usuarios.add(lblUsuario4);
-		
+
 		JLabel lblUsuario5 = new JLabel("");
 		lblUsuario5.setFont(new Font("Calibri", Font.BOLD, 20));
-		lblUsuario5.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario5.setForeground(Color.LIGHT_GRAY);
 		lblUsuario5.setBounds(1111, 653, 152, 14);
-		contentPane.add(lblUsuario5);			
+		contentPane.add(lblUsuario5);
 		usuarios.add(lblUsuario5);
-		
+
 		JLabel lblUsuario6 = new JLabel("");
 		lblUsuario6.setFont(new Font("Calibri", Font.BOLD, 20));
-		lblUsuario6.setForeground(Color.LIGHT_GRAY);	
+		lblUsuario6.setForeground(Color.LIGHT_GRAY);
 		lblUsuario6.setBounds(1156, 417, 144, 14);
-		contentPane.add(lblUsuario6);			
+		contentPane.add(lblUsuario6);
 		usuarios.add(lblUsuario6);
 
-		for(JLabel l:usuarios){
+		for (JLabel l : usuarios) {
 			l.setVisible(false);
 		}
-		for(int i=0;i<listaJugadores.size();i++){
+		for (int i = 0; i < listaJugadores.size(); i++) {
 			usuarios.get(i).setVisible(true);
 			usuarios.get(i).setText(listaJugadores.get(i).get(0));
 		}
-			
-		
-		
-		
+
 		avatar1 = new JLabel("");
 		avatar1.setBounds(50, 190, 160, 220);
 
@@ -439,6 +468,9 @@ public class MesaJuego extends JFrame {
 		apostarBtn1 = new JButton();
 		apostarBtn1.setBackground(new Color(0, 0, 0));
 		apostarBtn1.addActionListener(new ActionListener() {
+			/**
+			 * envia al servidor la peticion de retiro de la mano del jugador actual
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					rmi.retirarse(idJugador);
@@ -455,6 +487,9 @@ public class MesaJuego extends JFrame {
 		apostarBtn2 = new JButton();
 		apostarBtn2.setBackground(new Color(0, 0, 0));
 		apostarBtn2.addActionListener(new ActionListener() {
+			/**
+			 * envia al servidor la peticion de pasar el turno del jugador actual
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					rmi.apostar(idJugador, 0);
@@ -470,6 +505,9 @@ public class MesaJuego extends JFrame {
 		apostarBtn3 = new JButton();
 		apostarBtn3.setBackground(new Color(0, 0, 0));
 		apostarBtn3.addActionListener(new ActionListener() {
+			/**
+			 * envia al servidor la peticion de subir la apuesta actual
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				int dinero = Integer.parseInt(textCantidad.getText().trim());
 				int dineroJug = Integer.parseInt(dineroJugadores
@@ -489,11 +527,11 @@ public class MesaJuego extends JFrame {
 		apostarBtn3.setBounds(730, 476, 50, 50);
 		apostarBtn3.setIcon(new ImageIcon("Botones/subir.png"));
 		contentPane.add(apostarBtn3);
-		
-				fondoApuestas = new JLabel("");
-				fondoApuestas.setIcon(new ImageIcon("Botones/apuestas.png"));
-				fondoApuestas.setBounds(564, 375, 235, 90);
-				contentPane.add(fondoApuestas);
+
+		fondoApuestas = new JLabel("");
+		fondoApuestas.setIcon(new ImageIcon("Botones/apuestas.png"));
+		fondoApuestas.setBounds(564, 375, 235, 90);
+		contentPane.add(fondoApuestas);
 
 		lblPozoCant = new JLabel("0");
 		lblPozoCant.setForeground(Color.BLACK);
@@ -507,27 +545,25 @@ public class MesaJuego extends JFrame {
 		lblPozo.setBounds(626, 149, 100, 100);
 		lblPozo.setIcon(new ImageIcon("fichapozo.png"));
 		contentPane.add(lblPozo);
-		
-				JLabel dealer = new JLabel("");
-				dealer.setIcon(new ImageIcon("dealer1.png"));
-				dealer.setBounds(583, 0, 208, 182);
-				contentPane.add(dealer);
+
+		JLabel dealer = new JLabel("");
+		dealer.setIcon(new ImageIcon("dealer1.png"));
+		dealer.setBounds(583, 0, 208, 182);
+		contentPane.add(dealer);
 		fondo = new JLabel("");
 		fondo.setBackground(new Color(128, 0, 0));
 		contentPane.add(fondo);
 
 		fondo.setBounds(100, 30, 1340, 740);
 		
-		
-
-		llenarDinero();
 		for (int j = 0; j < listaJugadores.size(); j++) {
 			dineroJugadores.get(j).setText(listaJugadores.get(j).get(1));
 		}
-		
 
 	}
-
+	/**
+	 * inicia las cartas de la mesa en el reverso de la carta
+	 */
 	private void iniciarCartas() {
 		c = new ImageIcon("reverso.png");
 		icono = new ImageIcon(c.getImage().getScaledInstance(carta3.getWidth(),
@@ -540,12 +576,7 @@ public class MesaJuego extends JFrame {
 
 	}
 
-	/**
-	 * 
-	 */
-	private void llenarDinero() {
 
-	}
 
 	/**
 	 * muestra las primeras 3 cartas del juego en la mesa
@@ -792,7 +823,7 @@ public class MesaJuego extends JFrame {
 		carta51.setBounds(1000, 500, 80, 100);
 
 		carta52 = new JLabel("");
-		carta52.setBounds(1070,500, 80, 100);
+		carta52.setBounds(1070, 500, 80, 100);
 
 		carta31 = new JLabel("");
 		carta31.setBounds(530, 570, 80, 100);
@@ -881,11 +912,17 @@ public class MesaJuego extends JFrame {
 		}
 
 	}
-
+	/**
+	 * obtiene las cartas de la mesa
+	 * @return cartas de la mesa
+	 */
 	public List<String> getCartas() {
 		return cartas;
 	}
-
+	/**
+	 * Establece una lista de cartas a la mesa
+	 * @param cartas1 lista de cartas a establecer
+	 */
 	public void setCartas(List<String> cartas1) {
 		this.cartas = cartas1;
 	}
@@ -897,9 +934,10 @@ public class MesaJuego extends JFrame {
 		mostrarCartas(idJugador);
 	}
 
-	/**
-	 * 
-	 */
+/**
+ * Muestra las cartas un jugador
+ * @param jugador id del jugador 
+ */
 	public void mostrarCartas(int jugador) {
 		ImageIcon iic;
 		Icon ic;
@@ -990,11 +1028,15 @@ public class MesaJuego extends JFrame {
 			break;
 		}
 	}
-
+/**
+ * Hablilita los botones de apuestas para el jugador en turno
+ * @param turno id del jugador que tiene el tueno
+ * @param minApuesta	minima apuesta de la ronda
+ */
 	public void turno(int turno, int minApuesta) {
 
 		if (turno == idJugador) {
-			apostarBtn1.setEnabled(true);			
+			apostarBtn1.setEnabled(true);
 			apostarBtn2.setEnabled(true);
 			apostarBtn3.setEnabled(true);
 			minApuesta(turno, minApuesta);
@@ -1005,22 +1047,31 @@ public class MesaJuego extends JFrame {
 		}
 
 	}
-
+	/**
+	 * establece la minima y maxima apuesta del deslizador con los valores que puede apostar el jugador
+	 * @param jugador jugador en turno
+	 * @param minApuesta apuesta minima para la ronda
+	 */
 	public void minApuesta(int jugador, int minApuesta) {
-		int apuesta = Integer.parseInt(apuestaJugadores.get(jugador - 1).getText().trim());
-		System.out.println("apuesta "+apuesta+ " min "+ minApuesta);
-		
+		int apuesta = Integer.parseInt(apuestaJugadores.get(jugador - 1)
+				.getText().trim());
+		System.out.println("apuesta " + apuesta + " min " + minApuesta);
+
 		slider.setMinimum(minApuesta - apuesta);
-		if(minApuesta - apuesta!=0){
+		if (minApuesta - apuesta != 0) {
 			apostarBtn2.setEnabled(false);
 		}
-		textCantidad.setText(minApuesta-apuesta+"");
+		textCantidad.setText(minApuesta - apuesta + "");
 		slider.setValue(minApuesta - apuesta);
 		apuesta = Integer.parseInt(dineroJugadores.get(jugador - 1).getText()
 				.trim());
 		slider.setMaximum(apuesta);
 	}
-
+	/**
+	 * descuenta la cantidad de dinero del jugador indicado en la interfaz
+	 * @param jugador id del jugador al que se le descuenta el dinero
+	 * @param cantidad cantidad de dinero a descontar
+	 */
 	public void descontar(int jugador, int cantidad) {
 		int dinero = Integer.parseInt(dineroJugadores.get(jugador - 1)
 				.getText().trim());
@@ -1031,15 +1082,20 @@ public class MesaJuego extends JFrame {
 		dinero += cantidad;
 		apuestaJugadores.get(jugador - 1).setText(dinero + "");
 		int pozo = Integer.parseInt(lblPozoCant.getText().trim());
-		pozo += cantidad; 
+		pozo += cantidad;
 		lblPozoCant.setText(pozo + "");
 	}
-
+	/**
+	 * establece un ganador para la mano
+	 * @param ganador id fel jugador ganador
+	 */
 	public void ganador(int ganador) {
-		final int ganador1=ganador;
+		final int ganador1 = ganador;
 		lblGanador.setText("GANADOR JUGADOR" + ganador1);
 		new Thread(new Runnable() {
-			
+			/**
+			 * corre un hilo para esperar 5 segundos
+			 */
 			@Override
 			public void run() {
 				try {
@@ -1060,20 +1116,30 @@ public class MesaJuego extends JFrame {
 		cartasJugadores();
 
 	}
-
+	/**
+	 * cambia las apuestas de los jugadores en la ronda a 0
+	 */
 	public void cambioRonda() {
-		for(JLabel l:apuestaJugadores){
-			l.setText(0+"");
-			
+		for (JLabel l : apuestaJugadores) {
+			l.setText(0 + "");
+
 		}
-		
+
 	}
-	public void mostrarCartasParticipantes(List<Integer> participantes){
-		for(int i:participantes){
+	/**
+	 * muestra las de los jugadores participantes en la mano a todos los jugadores
+	 * @param participantes lista de identificadores de los jugadores participantes
+	 */
+	public void mostrarCartasParticipantes(List<Integer> participantes) {
+		for (int i : participantes) {
 			mostrarCartas(i);
 		}
 	}
-	private MesaJuego getClase() {		
+	/**
+	 * obtiene la instancia de la clase MesaJuego
+	 * @return instancia de la mesa de juego
+	 */
+	private MesaJuego getClase() {
 		return this;
 	}
 }
