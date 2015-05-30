@@ -1045,12 +1045,7 @@ public class MesaJuego extends JFrame {
 			@Override
 			public void run() {
 				
-				 try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				lblGanador.setVisible(false);
+				 
 				
 			}
 		}).start();
