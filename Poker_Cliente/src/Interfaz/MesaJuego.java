@@ -1040,7 +1040,17 @@ public class MesaJuego extends JFrame {
 			
 			@Override
 			public void run() {
-				JOptionPane.showMessageDialog(null, "GANADOR JUGADOR" + ganador1);
+				JLabel lblGanador = new JLabel("GANADOR JUGADOR" + ganador1);
+				lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
+				lblGanador.setForeground(Color.WHITE);	
+				lblGanador.setBounds(100, 100, 1000, 100);
+				panel.add(lblGanador);		
+				 try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				lblGanador.setVisible(false);
 				
 			}
 		}).start();
@@ -1051,7 +1061,6 @@ public class MesaJuego extends JFrame {
 		lblPozoCant.setText(0 + "");
 		iniciarCartas();
 		cartasJugadores();
-		lblGanador.setVisible(false);
 
 	}
 
