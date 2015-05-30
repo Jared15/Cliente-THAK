@@ -526,6 +526,7 @@ public class MesaJuego extends JFrame {
 		lblGanador.setFont(new Font("Calibri", Font.BOLD, 50));
 		lblGanador.setForeground(Color.WHITE);	
 		lblGanador.setBounds(100, 100, 1000, 100);
+		panel.add(lblGanador);
 
 	}
 
@@ -1039,14 +1040,17 @@ public class MesaJuego extends JFrame {
 	public void ganador(int ganador) {
 		final int ganador1=ganador;
 		lblGanador.setText("GANADOR JUGADOR" + ganador1);
-		panel.add(lblGanador);		
 		new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
-				
-				 
-				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Thread!");
 			}
 		}).start();
 		int dinero = Integer.parseInt(dineroJugadores.get(ganador - 1)
