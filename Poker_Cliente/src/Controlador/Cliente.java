@@ -11,7 +11,7 @@ import Connection.RemoteObserver;
 import Interfaz.IniciarSesion;
 
 public class Cliente extends UnicastRemoteObject implements RemoteObserver {
-	protected Cliente() throws RemoteException {
+	public Cliente() throws RemoteException {
 		super();
 	}
 
@@ -114,4 +114,22 @@ public class Cliente extends UnicastRemoteObject implements RemoteObserver {
 			}
 		}
 	}
+	public static RMI getRemoteService() {
+		return remoteService;
+	}
+
+
+	public static void setRemoteService(RMI remoteService) {
+		Cliente.remoteService = remoteService;
+	}
+
+	public static Cliente getClient() {
+		return client;
+	}
+
+
+	public static void setClient(Cliente client) {
+		Cliente.client = client;
+	}
+
 }

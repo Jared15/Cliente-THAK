@@ -304,13 +304,17 @@ public class DatosSesion extends JFrame {
  * @param nombreUsuario nombre del usuario que inicio sesion
  * @throws RemoteException exepcion de conexion con el servidor
  */
-	public void mostrarAvatarSesion(String nombreUsuario)
+	public boolean mostrarAvatarSesion(String nombreUsuario)
 			throws RemoteException {
+		boolean avatarMostrado= false;
 		List<String> j = rmi.traerAvatar(nombreUsuario);
 		lblNombreUsuario.setText(j.get(0));
 		label_1.setText(j.get(1));
 		label_2.setText(j.get(2));
 		label.setIcon(new ImageIcon(j.get(3)));
+		avatarMostrado= true;
+		return avatarMostrado;
+
 	}
 	/**
 	 * notifica un ganador a la Interfaz configuracion mesa
